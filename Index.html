@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Will You Be My Valentine?</title>
+    <style>
+        body {
+            background-color: #ffdae0;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            text-align: center;
+        }
+        .container { position: relative; }
+        h1 { color: #d63384; margin-bottom: 20px; }
+        .buttons { display: flex; gap: 20px; align-items: center; justify-content: center; }
+        
+        button {
+            padding: 15px 30px;
+            font-size: 18px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        #yesBtn { background-color: #4CAF50; color: white; }
+        #noBtn { background-color: #f44336; color: white; position: relative; }
+
+        .celebration { display: none; font-size: 30px; color: #d63384; }
+        img { width: 200px; margin-bottom: 20px; border-radius: 15px; }
+    </style>
+</head>
+<body>
+
+    <div id="main-content">
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHJreGZueGZ4Z3R4Z3R4Z3R4Z3R4Z3R4Z3R4Z3R4Z3R4Z3R4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/26hpK0S0H3R1o0H6w/giphy.gif" alt="Cute animation">
+        <h1 id="question">Will you be my valentine?</h1>
+        <div class="buttons" id="btnGroup">
+            <button id="yesBtn" onclick="celebrate()">Yes ! 😍</button>
+            <button id="noBtn" onclick="handleNo()">No 🤐</button>
+        </div>
+    </div>
+
+    <div id="celebration" class="celebration">
+        <h1>YAY! I Knew You'd Say Yes! 💖🎉</h1>
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHJreGZueGZ4Z3R4Z3R4Z3R4Z3R4Z3R4Z3R4Z3R4Z3R4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/l41lI4bXbB5B5Y1Yg/giphy.gif">
+    </div>
+
+    <script>
+        let clickCount = 0;
+        const noPhrases = [
+            "Are you sure ?????",
+            "Pleaseeeeeeeee🥹",
+            "If you say no, I will be sad and will kill you!!!!",
+            "I know you want to click Yes !!!!🥳",
+            "Last Chance !!!!"
+        ];
+
+        function handleNo() {
+            clickCount++;
+            const yesBtn = document.getElementById('yesBtn');
+            const noBtn = document.getElementById('noBtn');
+
+            // 1. Grow Yes Button
+            let newSize = 18 + (clickCount * 15);
+            yesBtn.style.fontSize = newSize + 'px';
+            yesBtn.style.padding = (15 + clickCount * 10) + 'px ' + (30 + clickCount * 20) + 'px';
+
+            // 2. Shrink No Button
+            let noSize = 18 - (clickCount * 2);
+            noBtn.style.fontSize = Math.max(noSize, 5) + 'px';
+
+            // 3. Update Text
+            if (clickCount <= noPhrases.length) {
+                noBtn.innerText = noPhrases[clickCount - 1];
+            }
+
+            // 4. Moving Logic for Stage 6
+            if (clickCount >= 5) {
+                moveButton(noBtn);
+            }
+            
+            if (clickCount >= 6) {
+                noBtn.style.pointerEvents = 'none'; // Make unclickable
+                noBtn.style.opacity = '0.5';
+            }
+        }
+
+        function moveButton(btn) {
+            const x = Math.random() * (window.innerWidth - btn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - btn.offsetHeight);
+            btn.style.position = 'absolute';
+            btn.style.left = x + 'px';
+            btn.style.top = y + 'px';
+        }
+
+        function celebrate() {
+            document.getElementById('main-content').style.display = 'none';
+            document.getElementById('celebration').style.display = 'block';
+            document.body.style.backgroundColor = "#ffb6c1";
+        }
+    </script>
+</body>
+</html>
