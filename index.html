@@ -2,97 +2,95 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For Subbu 💖</title>
+    <title>Will You Be My Valentine?</title>
     <style>
-        :root { --pookie-pink: #ff85a1; --hot-pink: #ff4d6d; --soft-bg: #ffe5ec; }
         body {
-            background-color: var(--soft-bg);
-            margin: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            overflow: hidden;
+            background-color: #fff0f3;
+            font-family: 'Arial Rounded MT Bold', sans-serif;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
+            justify-content: center;
             height: 100vh;
-            cursor: url('https://cur.cursors-4u.net/symbols/sym-1/sym46.cur'), auto;
-        }
-
-        /* Floating Hearts Background */
-        .heart-particle {
-            position: absolute;
-            pointer-events: none;
-            animation: floatUp 2s linear forwards;
-            color: var(--hot-pink);
-        }
-
-        @keyframes floatUp {
-            0% { transform: translateY(0) scale(1); opacity: 1; }
-            100% { transform: translateY(-100px) scale(0); opacity: 0; }
+            margin: 0;
+            overflow: hidden;
         }
 
         .container {
             background: white;
             padding: 40px;
-            border-radius: 40px;
-            box-shadow: 0 20px 50px rgba(255, 77, 109, 0.3);
+            border-radius: 30px;
+            box-shadow: 0 10px 25px rgba(255, 77, 109, 0.2);
             text-align: center;
+            min-width: 300px;
             z-index: 10;
-            transition: transform 0.3s;
         }
 
-        /* The Interactive Girl Image */
-        #girl-avatar {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            border: 5px solid var(--pookie-pink);
+        /* The Animation Box */
+        #avatar-container {
+            font-size: 80px;
             margin-bottom: 20px;
-            object-fit: cover;
             transition: all 0.3s ease;
         }
 
-        h1 { color: var(--hot-pink); font-size: 24px; margin-bottom: 30px; }
-
-        .btn-wrapper { display: flex; gap: 20px; justify-content: center; align-items: center; min-height: 100px; }
-
-        button {
-            padding: 15px 35px;
-            font-size: 18px;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        #heart-particle {
+            display: inline-block;
+            animation: beat 1s infinite;
         }
 
-        #yesBtn { background: var(--hot-pink); color: white; box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4); }
-        #noBtn { background: #adb5bd; color: white; position: relative; }
+        @keyframes beat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
 
-        #celebration { display: none; }
+        h1 { color: #ff4d6d; font-size: 24px; margin-bottom: 30px; }
+        
+        .buttons { display: flex; gap: 20px; align-items: center; justify-content: center; }
+        
+        button {
+            padding: 15px 30px;
+            font-size: 18px;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-weight: bold;
+        }
+
+        #yesBtn { background-color: #ff4d6d; color: white; z-index: 100; }
+        #noBtn { background-color: #ffccd5; color: #ff4d6d; position: relative; }
+
+        .celebration { display: none; text-align: center; }
     </style>
 </head>
-<body onmousemove="createHeart(event)">
+<body>
 
     <div id="main-content" class="container">
-        <img id="girl-avatar" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbmhyY2Z6Ynp4Ynp4Ynp4Ynp4Ynp4Ynp4Ynp4Ynp4Ynp4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/kZ1p8S24W4D6LqI5rI/giphy.gif" alt="Asking...">
-        
-        <h1 id="question">Will you be my valentine, Subbu? ✨</h1>
-        
-        <div class="btn-wrapper">
-            <button id="yesBtn" onclick="celebrate()" onmouseover="girlHappy()">Yes ! 😍</button>
-            <button id="noBtn" onclick="handleNo()" onmouseover="girlSad()">No 🤐</button>
+        <div id="avatar-container">
+            <span id="woman-emoji">👩🏻‍💼</span>
+            <span id="heart-particle">💝</span>
+            <span id="man-emoji">🤵🏻‍♂️</span>
+        </div>
+
+        <h1 id="question">Will you be my valentine, Subbu?</h1>
+
+        <div class="buttons" id="btnGroup">
+            <button id="yesBtn" onclick="celebrate()">Yes ! 😍</button>
+            <button id="noBtn" onclick="handleNo()">No 🤐</button>
         </div>
     </div>
 
-    <div id="celebration" class="container">
-        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHJreGZueGZ4Z3R4Z3R4Z3R4Z3R4Z3R4Z3R4Z3R4Z3R4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/26hpK0S0H3R1o0H6w/giphy.gif" width="250">
-        <h1 style="font-size: 40px;">YAYYY! ❤️<br>I love you!</h1>
+    <div id="celebration" class="celebration">
+        <div style="font-size: 100px;">🎉💍💖</div>
+        <h1 style="font-size: 40px; color: white;">I KNEW IT! 😍</h1>
+        <p style="font-size: 20px; color: white;">Best Valentine's Day Ever, Subbu!</p>
     </div>
 
     <script>
-        let count = 0;
-        const girl = document.getElementById('girl-avatar');
+        let clickCount = 0;
+        
+        // Expressions change based on your instructions
+        const womanExpressions = ["👩🏻‍💼", "🤨", "🥺", "🔪", "😤", "😈"];
         const noPhrases = [
             "Are you sure ?????",
             "Pleaseeeeeeeee🥹",
@@ -101,23 +99,60 @@
             "Last Chance !!!!"
         ];
 
-        // 10x Innovation: Heart Trail
-        function createHeart(e) {
-            const heart = document.createElement("div");
-            heart.innerHTML = "❤";
-            heart.className = "heart-particle";
-            heart.style.left = e.pageX + "px";
-            heart.style.top = e.pageY + "px";
-            heart.style.fontSize = Math.random() * 20 + 10 + "px";
-            document.body.appendChild(heart);
-            setTimeout(() => heart.remove(), 2000);
+        function handleNo() {
+            clickCount++;
+            const yesBtn = document.getElementById('yesBtn');
+            const noBtn = document.getElementById('noBtn');
+            const woman = document.getElementById('woman-emoji');
+            const heart = document.getElementById('heart-particle');
+
+            // 1. Update Expression
+            if (clickCount < womanExpressions.length) {
+                woman.innerText = womanExpressions[clickCount];
+            }
+
+            // 2. Change heart to something else if things get intense
+            if (clickCount === 3) heart.innerText = "💢";
+            if (clickCount === 5) heart.innerText = "⏳";
+
+            // 3. Growth Logic
+            let yesSize = 18 + (clickCount * 35); 
+            yesBtn.style.fontSize = yesSize + 'px';
+            yesBtn.style.padding = (15 + clickCount * 12) + 'px ' + (30 + clickCount * 25) + 'px';
+
+            // 4. Shrink Logic
+            let noSize = 18 - (clickCount * 2);
+            noBtn.style.fontSize = Math.max(noSize, 5) + 'px';
+
+            // 5. Update Phrases
+            if (clickCount <= noPhrases.length) {
+                noBtn.innerText = noPhrases[clickCount - 1];
+            }
+
+            // 6. Stage 6: Move and Disable
+            if (clickCount >= 5) {
+                moveButton(noBtn);
+            }
+            if (clickCount >= 6) {
+                noBtn.style.pointerEvents = 'none';
+                noBtn.style.visibility = 'hidden';
+                woman.innerText = "🤷🏻‍♀️"; // The "I'm waiting" look
+            }
         }
 
-        // 10x Innovation: Emotional Reactions
-        function girlSad() {
-            girl.src = "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHp1Mmw5Zmt6bnZhc3Bqem55bXp1YWRoZXp6YmN5bm81d2J4dzJkayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/iU8395XCj6lt8oP2Y7/giphy.gif";
-            girl.style.transform = "scale(0.9)";
+        function moveButton(btn) {
+            const x = Math.random() * (window.innerWidth - btn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - btn.offsetHeight);
+            btn.style.position = 'fixed';
+            btn.style.left = x + 'px';
+            btn.style.top = y + 'px';
         }
 
-        function girlHappy() {
-            girl.src = "
+        function celebrate() {
+            document.getElementById('main-content').style.display = 'none';
+            document.getElementById('celebration').style.display = 'block';
+            document.body.style.backgroundColor = "#ff4d6d";
+        }
+    </script>
+</body>
+</html>
