@@ -2,58 +2,97 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Will You Be My Valentine?</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Subbu 💖</title>
     <style>
+        :root { --pookie-pink: #ff85a1; --hot-pink: #ff4d6d; --soft-bg: #ffe5ec; }
         body {
-            background-color: #ffdae0;
-            font-family: 'Arial', sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
+            background-color: var(--soft-bg);
             margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             overflow: hidden;
-            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            cursor: url('https://cur.cursors-4u.net/symbols/sym-1/sym46.cur'), auto;
         }
-        .container { position: relative; }
-        h1 { color: #d63384; margin-bottom: 20px; }
-        .buttons { display: flex; gap: 20px; align-items: center; justify-content: center; }
-        
+
+        /* Floating Hearts Background */
+        .heart-particle {
+            position: absolute;
+            pointer-events: none;
+            animation: floatUp 2s linear forwards;
+            color: var(--hot-pink);
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            100% { transform: translateY(-100px) scale(0); opacity: 0; }
+        }
+
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 40px;
+            box-shadow: 0 20px 50px rgba(255, 77, 109, 0.3);
+            text-align: center;
+            z-index: 10;
+            transition: transform 0.3s;
+        }
+
+        /* The Interactive Girl Image */
+        #girl-avatar {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 5px solid var(--pookie-pink);
+            margin-bottom: 20px;
+            object-fit: cover;
+            transition: all 0.3s ease;
+        }
+
+        h1 { color: var(--hot-pink); font-size: 24px; margin-bottom: 30px; }
+
+        .btn-wrapper { display: flex; gap: 20px; justify-content: center; align-items: center; min-height: 100px; }
+
         button {
-            padding: 15px 30px;
+            padding: 15px 35px;
             font-size: 18px;
             border: none;
-            border-radius: 10px;
+            border-radius: 50px;
             cursor: pointer;
-            transition: all 0.2s ease;
+            font-weight: bold;
+            transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        #yesBtn { background-color: #4CAF50; color: white; }
-        #noBtn { background-color: #f44336; color: white; position: relative; }
+        #yesBtn { background: var(--hot-pink); color: white; box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4); }
+        #noBtn { background: #adb5bd; color: white; position: relative; }
 
-        .celebration { display: none; font-size: 30px; color: #d63384; }
-        img { width: 200px; margin-bottom: 20px; border-radius: 15px; }
+        #celebration { display: none; }
     </style>
 </head>
-<body>
+<body onmousemove="createHeart(event)">
 
-    <div id="main-content">
-        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHJreGZueGZ4Z3R4Z3R4Z3R4Z3R4Z3R4Z3R4Z3R4Z3R4Z3R4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/26hpK0S0H3R1o0H6w/giphy.gif" alt="Cute animation">
-        <h1 id="question">Will you be my valentine?</h1>
-        <div class="buttons" id="btnGroup">
-            <button id="yesBtn" onclick="celebrate()">Yes ! 😍</button>
-            <button id="noBtn" onclick="handleNo()">No 🤐</button>
+    <div id="main-content" class="container">
+        <img id="girl-avatar" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbmhyY2Z6Ynp4Ynp4Ynp4Ynp4Ynp4Ynp4Ynp4Ynp4Ynp4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/kZ1p8S24W4D6LqI5rI/giphy.gif" alt="Asking...">
+        
+        <h1 id="question">Will you be my valentine, Subbu? ✨</h1>
+        
+        <div class="btn-wrapper">
+            <button id="yesBtn" onclick="celebrate()" onmouseover="girlHappy()">Yes ! 😍</button>
+            <button id="noBtn" onclick="handleNo()" onmouseover="girlSad()">No 🤐</button>
         </div>
     </div>
 
-    <div id="celebration" class="celebration">
-        <h1>YAY! I Knew You'd Say Yes! 💖🎉</h1>
-        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHJreGZueGZ4Z3R4Z3R4Z3R4Z3R4Z3R4Z3R4Z3R4Z3R4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/l41lI4bXbB5B5Y1Yg/giphy.gif">
+    <div id="celebration" class="container">
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHJreGZueGZ4Z3R4Z3R4Z3R4Z3R4Z3R4Z3R4Z3R4Z3R4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/26hpK0S0H3R1o0H6w/giphy.gif" width="250">
+        <h1 style="font-size: 40px;">YAYYY! ❤️<br>I love you!</h1>
     </div>
 
     <script>
-        let clickCount = 0;
+        let count = 0;
+        const girl = document.getElementById('girl-avatar');
         const noPhrases = [
             "Are you sure ?????",
             "Pleaseeeeeeeee🥹",
@@ -62,49 +101,23 @@
             "Last Chance !!!!"
         ];
 
-        function handleNo() {
-            clickCount++;
-            const yesBtn = document.getElementById('yesBtn');
-            const noBtn = document.getElementById('noBtn');
-
-            // 1. Grow Yes Button
-            let newSize = 18 + (clickCount * 15);
-            yesBtn.style.fontSize = newSize + 'px';
-            yesBtn.style.padding = (15 + clickCount * 10) + 'px ' + (30 + clickCount * 20) + 'px';
-
-            // 2. Shrink No Button
-            let noSize = 18 - (clickCount * 2);
-            noBtn.style.fontSize = Math.max(noSize, 5) + 'px';
-
-            // 3. Update Text
-            if (clickCount <= noPhrases.length) {
-                noBtn.innerText = noPhrases[clickCount - 1];
-            }
-
-            // 4. Moving Logic for Stage 6
-            if (clickCount >= 5) {
-                moveButton(noBtn);
-            }
-            
-            if (clickCount >= 6) {
-                noBtn.style.pointerEvents = 'none'; // Make unclickable
-                noBtn.style.opacity = '0.5';
-            }
+        // 10x Innovation: Heart Trail
+        function createHeart(e) {
+            const heart = document.createElement("div");
+            heart.innerHTML = "❤";
+            heart.className = "heart-particle";
+            heart.style.left = e.pageX + "px";
+            heart.style.top = e.pageY + "px";
+            heart.style.fontSize = Math.random() * 20 + 10 + "px";
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 2000);
         }
 
-        function moveButton(btn) {
-            const x = Math.random() * (window.innerWidth - btn.offsetWidth);
-            const y = Math.random() * (window.innerHeight - btn.offsetHeight);
-            btn.style.position = 'absolute';
-            btn.style.left = x + 'px';
-            btn.style.top = y + 'px';
+        // 10x Innovation: Emotional Reactions
+        function girlSad() {
+            girl.src = "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHp1Mmw5Zmt6bnZhc3Bqem55bXp1YWRoZXp6YmN5bm81d2J4dzJkayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/iU8395XCj6lt8oP2Y7/giphy.gif";
+            girl.style.transform = "scale(0.9)";
         }
 
-        function celebrate() {
-            document.getElementById('main-content').style.display = 'none';
-            document.getElementById('celebration').style.display = 'block';
-            document.body.style.backgroundColor = "#ffb6c1";
-        }
-    </script>
-</body>
-</html>
+        function girlHappy() {
+            girl.src = "
