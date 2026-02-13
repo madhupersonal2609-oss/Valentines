@@ -2,11 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Will You Be My Valentine?</title>
+    <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
     <style>
         body {
             background-color: #fff0f3;
-            font-family: 'Arial Rounded MT Bold', sans-serif;
+            font-family: 'Poppins', sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -18,58 +20,45 @@
 
         .container {
             background: white;
-            padding: 40px;
-            border-radius: 30px;
-            box-shadow: 0 10px 25px rgba(255, 77, 109, 0.2);
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 15px 35px rgba(255, 77, 109, 0.2);
             text-align: center;
-            min-width: 300px;
             z-index: 10;
+            max-width: 400px;
         }
 
-        /* The Animation Box */
-        #avatar-container {
-            font-size: 80px;
-            margin-bottom: 20px;
-            transition: all 0.3s ease;
+        #animation-window {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
         }
 
-        #heart-particle {
-            display: inline-block;
-            animation: beat 1s infinite;
-        }
-
-        @keyframes beat {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-        }
-
-        h1 { color: #ff4d6d; font-size: 24px; margin-bottom: 30px; }
+        h1 { color: #ff4d6d; font-size: 22px; margin: 20px 0; }
         
-        .buttons { display: flex; gap: 20px; align-items: center; justify-content: center; }
+        .buttons { display: flex; gap: 15px; justify-content: center; align-items: center; }
         
         button {
-            padding: 15px 30px;
-            font-size: 18px;
+            padding: 12px 25px;
+            font-size: 16px;
             border: none;
-            border-radius: 15px;
+            border-radius: 12px;
             cursor: pointer;
-            transition: all 0.2s ease;
             font-weight: bold;
+            transition: transform 0.2s;
         }
 
-        #yesBtn { background-color: #ff4d6d; color: white; z-index: 100; }
+        #yesBtn { background-color: #ff4d6d; color: white; }
         #noBtn { background-color: #ffccd5; color: #ff4d6d; position: relative; }
 
-        .celebration { display: none; text-align: center; }
+        .celebrate-screen { display: none; text-align: center; }
     </style>
 </head>
 <body>
 
     <div id="main-content" class="container">
-        <div id="avatar-container">
-            <span id="woman-emoji">👩🏻‍💼</span>
-            <span id="heart-particle">💝</span>
-            <span id="man-emoji">🤵🏻‍♂️</span>
+        <div id="animation-window">
+            <dotlottie-player id="pookie-art" src="https://lottie.host/85910601-52a1-424f-b679-63304193309a/4vG7N34P57.json" background="transparent" speed="1" loop autoplay></dotlottie-player>
         </div>
 
         <h1 id="question">Will you be my valentine, Subbu?</h1>
@@ -80,17 +69,23 @@
         </div>
     </div>
 
-    <div id="celebration" class="celebration">
-        <div style="font-size: 100px;">🎉💍💖</div>
-        <h1 style="font-size: 40px; color: white;">I KNEW IT! 😍</h1>
-        <p style="font-size: 20px; color: white;">Best Valentine's Day Ever, Subbu!</p>
+    <div id="celebration" class="celebrate-screen">
+        <dotlottie-player src="https://lottie.host/80348704-569b-4405-9640-b38466e3a9d9/Hk3T3mK45j.json" background="transparent" speed="1" loop autoplay style="width: 300px;"></dotlottie-player>
+        <h1 style="font-size: 40px; color: #ff4d6d;">YAY! BEST DAY EVER! 💖</h1>
     </div>
 
     <script>
         let clickCount = 0;
         
-        // Expressions change based on your instructions
-        const womanExpressions = ["👩🏻‍💼", "🤨", "🥺", "🔪", "😤", "😈"];
+        // Links to different Lottie expressions
+        const moods = [
+            "https://lottie.host/85910601-52a1-424f-b679-63304193309a/4vG7N34P57.json", // Asking
+            "https://lottie.host/57833c8b-6298-422a-8959-1e3538466e85/Xn6h7N4X2f.json", // Confused
+            "https://lottie.host/3e6015f6-7901-49b0-9114-1f6e093554e2/vY6P2G4S9f.json", // Crying/Sad
+            "https://lottie.host/31336a75-199c-4861-9c60-8451b689255a/7rD2J19K7l.json", // Angry/Aggressive
+            "https://lottie.host/a2489115-38b4-478a-982b-0f862363d63a/Wn6K9L2B1f.json"  // "I'm watching you"
+        ];
+
         const noPhrases = [
             "Are you sure ?????",
             "Pleaseeeeeeeee🥹",
@@ -103,40 +98,33 @@
             clickCount++;
             const yesBtn = document.getElementById('yesBtn');
             const noBtn = document.getElementById('noBtn');
-            const woman = document.getElementById('woman-emoji');
-            const heart = document.getElementById('heart-particle');
+            const player = document.getElementById('pookie-art');
 
-            // 1. Update Expression
-            if (clickCount < womanExpressions.length) {
-                woman.innerText = womanExpressions[clickCount];
+            // 1. Change Animation Expression
+            if (clickCount < moods.length) {
+                player.load(moods[clickCount]);
             }
 
-            // 2. Change heart to something else if things get intense
-            if (clickCount === 3) heart.innerText = "💢";
-            if (clickCount === 5) heart.innerText = "⏳";
-
-            // 3. Growth Logic
-            let yesSize = 18 + (clickCount * 35); 
+            // 2. Growth Logic (Massive growth)
+            let yesSize = 16 + (clickCount * 30); 
             yesBtn.style.fontSize = yesSize + 'px';
-            yesBtn.style.padding = (15 + clickCount * 12) + 'px ' + (30 + clickCount * 25) + 'px';
+            yesBtn.style.padding = (12 + clickCount * 15) + 'px ' + (25 + clickCount * 25) + 'px';
 
-            // 4. Shrink Logic
-            let noSize = 18 - (clickCount * 2);
+            // 3. Shrink Logic
+            let noSize = 16 - (clickCount * 2);
             noBtn.style.fontSize = Math.max(noSize, 5) + 'px';
 
-            // 5. Update Phrases
+            // 4. Update Phrases
             if (clickCount <= noPhrases.length) {
                 noBtn.innerText = noPhrases[clickCount - 1];
             }
 
-            // 6. Stage 6: Move and Disable
+            // 5. Teleport & Disable
             if (clickCount >= 5) {
                 moveButton(noBtn);
             }
             if (clickCount >= 6) {
-                noBtn.style.pointerEvents = 'none';
-                noBtn.style.visibility = 'hidden';
-                woman.innerText = "🤷🏻‍♀️"; // The "I'm waiting" look
+                noBtn.style.display = 'none'; // Completely vanish
             }
         }
 
@@ -151,7 +139,7 @@
         function celebrate() {
             document.getElementById('main-content').style.display = 'none';
             document.getElementById('celebration').style.display = 'block';
-            document.body.style.backgroundColor = "#ff4d6d";
+            document.body.style.backgroundColor = "white";
         }
     </script>
 </body>
