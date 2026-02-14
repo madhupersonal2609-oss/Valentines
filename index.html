@@ -18,13 +18,17 @@
             transition: background 0.5s ease;
         }
 
-        /* Floating Hearts Layer */
+        /* Floating Hearts Animation */
         .heart {
-            position: absolute; color: rgba(214, 51, 132, 0.4);
-            animation: float 6s linear infinite; font-size: 20px; z-index: 1;
+            position: absolute;
+            color: rgba(214, 51, 132, 0.5);
+            animation: float 6s linear infinite;
+            font-size: 20px;
+            z-index: 1;
+            pointer-events: none;
         }
         @keyframes float {
-            0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+            0% { transform: translateY(110vh) rotate(0deg); opacity: 1; }
             100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
         }
 
@@ -47,7 +51,7 @@
             cursor: pointer; font-weight: 600; transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        #yesBtn { background-color: #28a745; color: white; box-shadow: 0 4px 15px rgba(40,167,69,0.3); }
+        #yesBtn { background-color: #28a745; color: white; box-shadow: 0 4px 15px rgba(40,167,69,0.3); position: relative; z-index: 100; }
         #noBtn { background-color: #dc3545; color: white; position: relative; }
 
         #celebration { display: none; text-align: center; color: white; padding: 20px; z-index: 20; }
@@ -75,7 +79,7 @@
     </div>
 
     <div id="celebration">
-        <img src="https://media.tenor.com/7f_47K-I360AAAAi/milk-and-mocha.gif" style="width: 250px; border-radius: 20px; margin-bottom: 20px;">
+        <img src="https://media.tenor.com/XqT_uU_o_XgAAAAi/milk-and-mocha.gif" style="width: 250px; border-radius: 20px; margin-bottom: 20px;">
         <div class="official-title">It's Official!</div>
         <div class="final-msg">
             "Thanks for being the most wonderful, idiotic, sadistic and closest person to my heart ❤️!! Ofcourse you don't have choice of saying NO anymore ! You are stuck with me and me with you FOREVER!"
@@ -86,14 +90,15 @@
     <script>
         let clickCount = 0;
 
-        // Background Hearts logic
+        // Floating Hearts Logic
         function createHeart() {
+            const container = document.getElementById('heart-container');
             const heart = document.createElement('div');
             heart.classList.add('heart');
             heart.innerHTML = '❤️';
             heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = Math.random() * 3 + 3 + 's';
-            document.getElementById('heart-container').appendChild(heart);
+            heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+            container.appendChild(heart);
             setTimeout(() => { heart.remove(); }, 6000);
         }
         setInterval(createHeart, 400);
@@ -106,7 +111,7 @@
             "https://media.tenor.com/uR6G-4T3_pYAAAAi/milk-and-mocha.gif"
         ];
 
-        const noPhrases = ["Are you sure?", "Pleaseeeeeeee🥹", "I'll be sad and kill you!!", "I know you want Yes!🥳", "Last Chance!"];
+        const noPhrases = ["Are you sure?", "Pleaseeee🥹", "I'll be sad and kill you!!", "I know you want Yes!🥳", "Last Chance!"];
 
         function handleNo() {
             clickCount++;
