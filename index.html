@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Will You Be My Valentine?</title>
-    <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
         body {
-            background-color: #fff0f3;
+            background-color: #ffdae0;
+            background-image: url("https://www.transparenttextures.com/patterns/heart.png");
             font-family: 'Poppins', sans-serif;
             display: flex;
             flex-direction: column;
@@ -16,52 +17,60 @@
             height: 100vh;
             margin: 0;
             overflow: hidden;
+            transition: background 0.5s ease;
         }
 
         .container {
-            background: white;
-            padding: 30px;
-            border-radius: 25px;
-            box-shadow: 0 15px 35px rgba(255, 77, 109, 0.2);
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 35px;
+            box-shadow: 0 15px 40px rgba(214, 51, 132, 0.2);
             text-align: center;
             z-index: 10;
-            max-width: 400px;
+            width: 350px;
+            border: 2px solid #ffb3c1;
         }
 
-        #animation-window {
-            width: 200px;
-            height: 200px;
-            margin: 0 auto;
+        #pookie-display {
+            font-size: 90px;
+            margin-bottom: 15px;
+            display: block;
+            animation: float 3s ease-in-out infinite;
         }
 
-        h1 { color: #ff4d6d; font-size: 22px; margin: 20px 0; }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        h1 { color: #d63384; font-size: 22px; margin-bottom: 30px; line-height: 1.4; }
         
-        .buttons { display: flex; gap: 15px; justify-content: center; align-items: center; }
+        .buttons { display: flex; gap: 20px; justify-content: center; align-items: center; }
         
         button {
-            padding: 12px 25px;
-            font-size: 16px;
+            padding: 15px 30px;
+            font-size: 18px;
             border: none;
-            border-radius: 12px;
+            border-radius: 50px;
             cursor: pointer;
-            font-weight: bold;
-            transition: transform 0.2s;
+            font-weight: 600;
+            transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
-        #yesBtn { background-color: #ff4d6d; color: white; }
-        #noBtn { background-color: #ffccd5; color: #ff4d6d; position: relative; }
+        #yesBtn { background-color: #28a745; color: white; }
+        #noBtn { background-color: #dc3545; color: white; position: relative; }
 
-        .celebrate-screen { display: none; text-align: center; }
+        .celebration { display: none; padding: 20px; }
+        .celebration h2 { font-family: 'Dancing Script', cursive; font-size: 36px; color: white; margin-bottom: 15px; }
+        .celebration p { font-size: 18px; color: white; line-height: 1.6; font-weight: 400; }
     </style>
 </head>
 <body>
 
     <div id="main-content" class="container">
-        <div id="animation-window">
-            <dotlottie-player id="pookie-art" src="https://lottie.host/85910601-52a1-424f-b679-63304193309a/4vG7N34P57.json" background="transparent" speed="1" loop autoplay></dotlottie-player>
-        </div>
-
-        <h1 id="question">Will you be my valentine, Subbu?</h1>
+        <div id="pookie-display">🧸</div>
+        <h1 id="question">Will you be my valentine, Subbu? ✨</h1>
 
         <div class="buttons" id="btnGroup">
             <button id="yesBtn" onclick="celebrate()">Yes ! 😍</button>
@@ -69,23 +78,16 @@
         </div>
     </div>
 
-    <div id="celebration" class="celebrate-screen">
-        <dotlottie-player src="https://lottie.host/80348704-569b-4405-9640-b38466e3a9d9/Hk3T3mK45j.json" background="transparent" speed="1" loop autoplay style="width: 300px;"></dotlottie-player>
-        <h1 style="font-size: 40px; color: #ff4d6d;">YAY! BEST DAY EVER! 💖</h1>
+    <div id="celebration" class="celebration" style="text-align: center; max-width: 450px;">
+        <div style="font-size: 100px; margin-bottom: 10px;">💖💍✨</div>
+        <h2>It's Official!</h2>
+        <p>"Thanks for being the most wonderful, idiotic, sadistic and closest person to my heart ❤️!! Ofcourse you don't have choice of saying NO anymore ! You are stuck with me and me with you FOREVER!"</p>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <script>
         let clickCount = 0;
-        
-        // Links to different Lottie expressions
-        const moods = [
-            "https://lottie.host/85910601-52a1-424f-b679-63304193309a/4vG7N34P57.json", // Asking
-            "https://lottie.host/57833c8b-6298-422a-8959-1e3538466e85/Xn6h7N4X2f.json", // Confused
-            "https://lottie.host/3e6015f6-7901-49b0-9114-1f6e093554e2/vY6P2G4S9f.json", // Crying/Sad
-            "https://lottie.host/31336a75-199c-4861-9c60-8451b689255a/7rD2J19K7l.json", // Angry/Aggressive
-            "https://lottie.host/a2489115-38b4-478a-982b-0f862363d63a/Wn6K9L2B1f.json"  // "I'm watching you"
-        ];
-
+        const pookieMoods = ["🧸", "🤨", "🥹", "😡", "😭", "👿"];
         const noPhrases = [
             "Are you sure ?????",
             "Pleaseeeeeeeee🥹",
@@ -98,33 +100,30 @@
             clickCount++;
             const yesBtn = document.getElementById('yesBtn');
             const noBtn = document.getElementById('noBtn');
-            const player = document.getElementById('pookie-art');
+            const pookie = document.getElementById('pookie-display');
 
-            // 1. Change Animation Expression
-            if (clickCount < moods.length) {
-                player.load(moods[clickCount]);
+            if (clickCount < pookieMoods.length) {
+                pookie.innerText = pookieMoods[clickCount];
             }
 
-            // 2. Growth Logic (Massive growth)
-            let yesSize = 16 + (clickCount * 30); 
+            let yesSize = 18 + (clickCount * 35); 
             yesBtn.style.fontSize = yesSize + 'px';
-            yesBtn.style.padding = (12 + clickCount * 15) + 'px ' + (25 + clickCount * 25) + 'px';
+            yesBtn.style.padding = (15 + clickCount * 12) + 'px ' + (30 + clickCount * 25) + 'px';
 
-            // 3. Shrink Logic
-            let noSize = 16 - (clickCount * 2);
-            noBtn.style.fontSize = Math.max(noSize, 5) + 'px';
+            let noSize = 18 - (clickCount * 2);
+            noBtn.style.fontSize = Math.max(noSize, 4) + 'px';
+            noBtn.style.padding = "5px 10px";
 
-            // 4. Update Phrases
             if (clickCount <= noPhrases.length) {
                 noBtn.innerText = noPhrases[clickCount - 1];
             }
 
-            // 5. Teleport & Disable
             if (clickCount >= 5) {
                 moveButton(noBtn);
             }
             if (clickCount >= 6) {
-                noBtn.style.display = 'none'; // Completely vanish
+                noBtn.style.display = 'none';
+                pookie.innerText = "💀"; 
             }
         }
 
@@ -139,7 +138,23 @@
         function celebrate() {
             document.getElementById('main-content').style.display = 'none';
             document.getElementById('celebration').style.display = 'block';
-            document.body.style.backgroundColor = "white";
+            document.body.style.backgroundColor = "#ff4d6d";
+            document.body.style.backgroundImage = "none";
+            
+            // Expert touch: Confetti blast
+            var duration = 5 * 1000;
+            var animationEnd = Date.now() + duration;
+            var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+
+            function randomInRange(min, max) { return Math.random() * (max - min) + min; }
+
+            var interval = setInterval(function() {
+                var timeLeft = animationEnd - Date.now();
+                if (timeLeft <= 0) { return clearInterval(interval); }
+                var particleCount = 50 * (timeLeft / duration);
+                confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } }));
+                confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
+            }, 250);
         }
     </script>
 </body>
