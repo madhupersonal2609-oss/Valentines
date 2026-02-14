@@ -13,42 +13,26 @@
 
         body {
             background-color: var(--baby-pink);
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 100 100"><path d="M50 80c-20-15-30-25-30-35 0-10 10-15 15-15 5 0 10 5 15 10 5-5 10-10 15-10 5 0 15 5 15 15 0 10-10 20-30 35z" fill="%23ffb3c1" fill-opacity="0.5"/></svg>');
             font-family: 'Poppins', sans-serif;
             display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; overflow: hidden;
             transition: background 0.5s ease;
-        }
-
-        /* Floating Hearts Animation */
-        .heart {
-            position: absolute; color: rgba(214, 51, 132, 0.4);
-            animation: float 6s linear infinite; font-size: 20px; z-index: 1; pointer-events: none;
-        }
-        @keyframes float {
-            0% { transform: translateY(110vh) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
         }
 
         .container {
             background: rgba(255, 255, 255, 0.95);
             padding: 40px; border-radius: 40px; box-shadow: 0 20px 50px rgba(214, 51, 132, 0.2);
             text-align: center; width: 350px; z-index: 10; border: 2px solid white;
-            position: relative; overflow: hidden;
-        }
-
-        /* Background Watermark Animation (Girl Asking Guy) */
-        .bg-gif {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            object-fit: cover; opacity: 0.12; z-index: -1; pointer-events: none;
         }
 
         #pookie-img {
             width: 180px; height: 180px; object-fit: contain; margin-bottom: 20px;
-            position: relative; z-index: 11;
+            transition: transform 0.3s ease;
         }
 
-        h1 { color: var(--deep-pink); font-size: 22px; margin-bottom: 30px; line-height: 1.4; position: relative; z-index: 11;}
+        h1 { color: var(--deep-pink); font-size: 22px; margin-bottom: 30px; line-height: 1.4; }
 
-        .buttons { display: flex; gap: 15px; justify-content: center; align-items: center; position: relative; z-index: 11;}
+        .buttons { display: flex; gap: 15px; justify-content: center; align-items: center; }
 
         button {
             padding: 12px 25px; font-size: 16px; border: none; border-radius: 50px;
@@ -69,12 +53,8 @@
 </head>
 <body>
 
-    <div id="heart-container"></div>
-
     <div id="main-content" class="container">
-        <img class="bg-gif" src="https://media.tenor.com/On7be2S_T_wAAAAi/milk-and-mocha.gif">
-        
-        <img id="pookie-img" src="https://media.tenor.com/7S8fC3J0LpMAAAAi/milk-and-mocha.gif" alt="Asking">
+        <img id="pookie-img" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHIzZTM3eXpueG94eG94eG94eG94eG94eG94eG94eG94eG94ZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/cLS1cfxvGOPVpf9g3y/giphy.gif" alt="Asking">
         
         <h1 id="question">Will you be my valentine, Subbu? ✨</h1>
 
@@ -85,7 +65,6 @@
     </div>
 
     <div id="celebration">
-        <img src="https://media.tenor.com/XqT_uU_o_XgAAAAi/milk-and-mocha.gif" style="width: 250px; border-radius: 20px; margin-bottom: 20px;">
         <div class="official-title">It's Official!</div>
         <div class="final-msg">
             "Thanks for being the most wonderful, idiotic, sadistic and closest person to my heart ❤️!! Ofcourse you don't have choice of saying NO anymore ! You are stuck with me and me with you FOREVER!"
@@ -95,27 +74,14 @@
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <script>
         let clickCount = 0;
-
-        // Floating Hearts logic
-        function createHeart() {
-            const container = document.getElementById('heart-container');
-            const heart = document.createElement('div');
-            heart.classList.add('heart');
-            heart.innerHTML = '❤️';
-            heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
-            container.appendChild(heart);
-            setTimeout(() => { heart.remove(); }, 6000);
-        }
-        setInterval(createHeart, 400);
         
-        // Expressions using stable Tenor links
+        // Progression of the Woman's Expressions
         const womanGifs = [
-            "https://media.tenor.com/7S8fC3J0LpMAAAAi/milk-and-mocha.gif", 
-            "https://media.tenor.com/HAn8V0K9MFAAAAAi/milk-and-mocha.gif", 
-            "https://media.tenor.com/YpsD67L97HAAAAAi/milk-and-mocha.gif", 
-            "https://media.tenor.com/97_1N86I19MAAAAi/milk-and-mocha.gif", 
-            "https://media.tenor.com/uR6G-4T3_pYAAAAi/milk-and-mocha.gif"
+            "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHIzZTM3eXpueG94eG94eG94eG94eG94eG94eG94eG94eG94ZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/cLS1cfxvGOPVpf9g3y/giphy.gif", // Asking
+            "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHIzZTM3eXpueG94eG94eG94eG94eG94eG94eG94eG94eG94ZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/L95W4wv8nnb9V0W1Qu/giphy.gif", // Annoyed/Sad
+            "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHIzZTM3eXpueG94eG94eG94eG94eG94eG94eG94eG94eG94ZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/OPU6wYfV5InyJdMd6K/giphy.gif", // Crying
+            "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHIzZTM3eXpueG94eG94eG94eG94eG94eG94eG94eG94eG94ZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/llsq863S41l3cWEnT0/giphy.gif", // Angry/Sadistic
+            "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHIzZTM3eXpueG94eG94eG94eG94eG94eG94eG94eG94eG94ZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/vVzH2Li3WdmEy9WnmS/giphy.gif"  // Despair
         ];
 
         const noPhrases = ["Are you sure?", "Pleaseeee🥹", " If you didn't click on Yes, I'll be sad and kill you!!", "I know you want Yes!🥳", "Last Chance!"];
@@ -126,16 +92,20 @@
             const noBtn = document.getElementById('noBtn');
             const pookie = document.getElementById('pookie-img');
 
+            // --- CHANGE WOMAN'S EXPRESSION ---
             if (clickCount < womanGifs.length) {
                 pookie.src = womanGifs[clickCount];
             }
 
+            // --- GROWTH LOGIC ---
             let yesSize = 16 + (clickCount * 45); 
             yesBtn.style.fontSize = yesSize + 'px';
             yesBtn.style.padding = (15 + clickCount * 15) + 'px ' + (30 + clickCount * 30) + 'px';
             
+            // --- UPDATE TEXT ---
             if (clickCount <= noPhrases.length) noBtn.innerText = noPhrases[clickCount - 1];
             
+            // --- MOVEMENT LOGIC ---
             if (clickCount >= 5) {
                 noBtn.style.position = 'fixed';
                 noBtn.style.left = Math.random() * 80 + '%';
@@ -148,7 +118,9 @@
             document.getElementById('main-content').style.display = 'none';
             document.getElementById('celebration').style.display = 'block';
             document.body.style.backgroundColor = "#d63384";
+            document.body.style.backgroundImage = "none";
             
+            // Launch the celebration confetti!
             var end = Date.now() + (4 * 1000);
             (function frame() {
                 confetti({ particleCount: 5, angle: 60, spread: 55, origin: { x: 0 }, colors: ['#ffffff', '#ffb3c1'] });
