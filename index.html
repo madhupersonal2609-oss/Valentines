@@ -16,7 +16,6 @@
             background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 100 100"><path d="M50 80c-20-15-30-25-30-35 0-10 10-15 15-15 5 0 10 5 15 10 5-5 10-10 15-10 5 0 15 5 15 15 0 10-10 20-30 35z" fill="%23ffb3c1" fill-opacity="0.4"/></svg>');
             font-family: 'Poppins', sans-serif;
             display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; overflow: hidden;
-            transition: background 0.8s ease;
         }
 
         .heart {
@@ -29,21 +28,21 @@
         }
 
         .container {
-            background: rgba(255, 255, 255, 0.9);
-            padding: 40px; border-radius: 40px; box-shadow: 0 20px 50px rgba(214, 51, 132, 0.2);
-            text-align: center; width: 320px; z-index: 10; border: 2px solid white;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px; border-radius: 40px; box-shadow: 0 20px 50px rgba(214, 51, 132, 0.2);
+            text-align: center; width: 340px; z-index: 10; border: 2px solid white;
             backdrop-filter: blur(5px);
         }
 
         .gif-box {
-            width: 100%; min-height: 200px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;
+            width: 100%; min-height: 180px; display: flex; align-items: center; justify-content: center; margin-bottom: 15px;
         }
 
-        #pookie-img {
+        .gif-box img {
             max-width: 100%; max-height: 200px; object-fit: contain; border-radius: 15px;
         }
 
-        h1 { color: var(--deep-pink); font-size: 22px; margin-bottom: 30px; line-height: 1.4; }
+        h1 { color: var(--deep-pink); font-size: 22px; margin-bottom: 25px; line-height: 1.4; }
         .buttons { display: flex; gap: 15px; justify-content: center; align-items: center; position: relative; }
 
         button {
@@ -54,16 +53,12 @@
         #yesBtn { background-color: #28a745; color: white; z-index: 100; }
         #noBtn { background-color: #dc3545; color: white; position: relative; z-index: 99; }
 
-        #celebration { 
-            display: none; text-align: center; color: white; z-index: 20; 
-            background: rgba(0, 0, 0, 0.5); padding: 30px; border-radius: 30px;
-            backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.2);
-            max-width: 350px;
-        }
-        .official-title { font-family: 'Dancing Script', cursive; font-size: 50px; margin-bottom: 15px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+        /* Celebration styles - now matching the main container */
+        #celebration { display: none; }
+        .official-title { font-family: 'Dancing Script', cursive; font-size: 42px; color: var(--deep-pink); margin: 10px 0; }
         .final-msg {
-            font-size: 18px; line-height: 1.6; font-weight: 400;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            font-size: 16px; line-height: 1.5; color: #333; font-weight: 400;
+            background: rgba(255, 182, 193, 0.2); padding: 15px; border-radius: 20px;
         }
     </style>
 </head>
@@ -82,7 +77,10 @@
         </div>
     </div>
 
-    <div id="celebration">
+    <div id="celebration" class="container">
+        <div class="gif-box">
+            <img src="https://github.com/user-attachments/assets/f00d205a-8993-4b6f-acb6-12283dd3deb8" alt="Celebration GIF">
+        </div>
         <div class="official-title">It's Official!</div>
         <div class="final-msg">
             "Thanks for being the most wonderful, idiotic, sadistic and closest person to my heart ❤️!! Ofcourse you don't have choice of saying NO anymore ! You are stuck with me and me with you FOREVER!"
@@ -137,21 +135,17 @@
         }
 
         function celebrate() {
+            // Hide the question card
             document.getElementById('main-content').style.display = 'none';
+            // Show the celebration card
             const celebDiv = document.getElementById('celebration');
             celebDiv.style.display = 'block';
             
-            // MODIFIED: backgroundSize set to contain to fit screen perfectly
-            document.body.style.backgroundImage = "url('https://github.com/user-attachments/assets/f00d205a-8993-4b6f-acb6-12283dd3deb8')";
-            document.body.style.backgroundSize = "contain"; 
-            document.body.style.backgroundRepeat = "no-repeat";
-            document.body.style.backgroundPosition = "center";
-            document.body.style.backgroundColor = "black"; 
-            
+            // Keep the pink background and just trigger confetti
             const end = Date.now() + 5000;
             (function frame() {
-                confetti({ particleCount: 10, angle: 60, spread: 55, origin: { x: 0 }, colors: ['#ffffff', '#ffdae0', '#d63384'] });
-                confetti({ particleCount: 10, angle: 120, spread: 55, origin: { x: 1 }, colors: ['#ffffff', '#ffdae0', '#d63384'] });
+                confetti({ particleCount: 10, angle: 60, spread: 55, origin: { x: 0 }, colors: ['#ffdae0', '#d63384', '#ffffff'] });
+                confetti({ particleCount: 10, angle: 120, spread: 55, origin: { x: 1 }, colors: ['#ffdae0', '#d63384', '#ffffff'] });
                 if (Date.now() < end) requestAnimationFrame(frame);
             }());
         }
