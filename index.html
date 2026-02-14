@@ -18,7 +18,6 @@
             display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; overflow: hidden;
         }
 
-        /* Floating Hearts Animation */
         .heart {
             position: absolute; color: rgba(214, 51, 132, 0.5);
             animation: float 6s linear infinite; font-size: 20px; z-index: 1; pointer-events: none;
@@ -34,17 +33,16 @@
             text-align: center; width: 320px; z-index: 10; border: 2px solid white;
         }
 
-        /* Fixed height container for the GIF to prevent layout jumping */
         .gif-box {
-            width: 100%; height: 200px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;
+            width: 100%; min-height: 200px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;
         }
 
         #pookie-img {
-            max-width: 100%; max-height: 100%; object-fit: contain;
+            max-width: 100%; max-height: 200px; object-fit: contain; border-radius: 15px;
         }
 
         h1 { color: var(--deep-pink); font-size: 22px; margin-bottom: 30px; line-height: 1.4; }
-        .buttons { display: flex; gap: 15px; justify-content: center; align-items: center; }
+        .buttons { display: flex; gap: 15px; justify-content: center; align-items: center; position: relative; }
 
         button {
             padding: 12px 25px; font-size: 16px; border: none; border-radius: 50px;
@@ -69,7 +67,10 @@
 
     <div id="main-content" class="container">
         <div class="gif-box">
-            <img id="pookie-img" src="https://media1.tenor.com/m/On7be2S_T_wAAAAC/milk-and-mocha.gif" alt="Asking">
+            <img id="pookie-img" 
+                 src="https://media1.tenor.com/m/On7be2S_T_wAAAAC/milk-and-mocha.gif" 
+                 referrerpolicy="no-referrer" 
+                 alt="Asking">
         </div>
         <h1 id="question">Will you be my valentine, Subbu? ✨</h1>
         <div class="buttons">
@@ -80,7 +81,9 @@
 
     <div id="celebration">
         <div class="gif-box">
-            <img src="https://media1.tenor.com/m/XqT_uU_o_XgAAAAC/milk-and-mocha.gif" style="border-radius: 20px;">
+            <img src="https://media1.tenor.com/m/XqT_uU_o_XgAAAAC/milk-and-mocha.gif" 
+                 referrerpolicy="no-referrer" 
+                 style="border-radius: 20px; max-width: 100%;">
         </div>
         <div class="official-title">It's Official!</div>
         <div class="final-msg">
@@ -104,7 +107,7 @@
         }
         setInterval(createHeart, 300);
         
-        // RAW MEDIA LINKS FOR BETTER GITHUB PAGES LOADING
+        // High-stability links for GitHub Pages
         const womanGifs = [
             "https://media1.tenor.com/m/On7be2S_T_wAAAAC/milk-and-mocha.gif", 
             "https://media1.tenor.com/m/HAn8V0K9MFAAAAAC/milk-and-mocha.gif", 
@@ -141,16 +144,14 @@
                 noBtn.innerText = noPhrases[clickCount - 1];
             }
             
-            // JUMPING LOGIC (6th and 7th click)
             if (clickCount >= 6 && clickCount <= 7) {
                 noBtn.style.position = 'fixed';
                 const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
                 const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
-                noBtn.style.left = x + 'px';
-                noBtn.style.top = y + 'px';
+                noBtn.style.left = Math.max(0, x) + 'px';
+                noBtn.style.top = Math.max(0, y) + 'px';
             }
 
-            // DISAPPEAR (8th click)
             if (clickCount >= 8) {
                 noBtn.style.display = 'none';
             }
