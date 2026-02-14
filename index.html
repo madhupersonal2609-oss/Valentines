@@ -17,37 +17,53 @@
             background: rgba(255, 255, 255, 0.95);
             padding: 40px; border-radius: 40px; text-align: center; width: 350px; 
             box-shadow: 0 20px 50px rgba(214, 51, 132, 0.2); border: 2px solid white;
+            position: relative;
         }
 
-        #pookie-img {
-            width: 180px; height: 180px; object-fit: contain; margin-bottom: 20px;
+        /* THE POOKIE BOX */
+        .pookie-container {
+            width: 150px; height: 150px; margin: 0 auto 20px; position: relative;
         }
 
-        h1 { color: #d63384; font-size: 22px; margin-bottom: 30px; line-height: 1.4; }
+        /* Drawing a "Code-Based" Pookie so it NEVER fails to load */
+        .pookie-face {
+            width: 100px; height: 85px; background: white; border-radius: 50% 50% 45% 45%;
+            position: absolute; left: 25px; top: 30px; border: 3px solid #555;
+            transition: all 0.3s ease;
+        }
+        .ear { width: 30px; height: 30px; background: white; border-radius: 50%; border: 3px solid #555; position: absolute; top: 15px; }
+        .ear.l { left: 20px; } .ear.r { right: 20px; }
+        .eye { width: 8px; height: 8px; background: #333; border-radius: 50%; position: absolute; top: 40px; transition: all 0.3s; }
+        .eye.l { left: 30%; } .eye.r { right: 30%; }
+        .blush { width: 15px; height: 8px; background: #ffb3c1; border-radius: 50%; position: absolute; top: 50px; opacity: 0.8; }
+        .blush.l { left: 15%; } .blush.r { right: 15%; }
+        .mouth { width: 12px; height: 8px; border: 2px solid #333; border-top: 0; border-radius: 0 0 10px 10px; position: absolute; top: 55px; left: 44%; transition: all 0.3s; }
 
+        /* ANIMATIONS */
+        @keyframes cry { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
+        @keyframes shake { 0% { transform: translate(1px, 1px); } 50% { transform: translate(-2px, -1px); } 100% { transform: translate(1px, 1px); } }
+
+        h1 { color: #d63384; font-size: 20px; margin-bottom: 30px; }
         .buttons { display: flex; gap: 15px; justify-content: center; align-items: center; }
-
-        button {
-            padding: 12px 25px; font-size: 16px; border: none; border-radius: 50px;
-            cursor: pointer; font-weight: 600; transition: all 0.3s ease;
-        }
-
+        button { padding: 12px 25px; font-size: 16px; border: none; border-radius: 50px; cursor: pointer; font-weight: 600; transition: all 0.3s; }
         #yesBtn { background-color: #28a745; color: white; }
         #noBtn { background-color: #dc3545; color: white; position: relative; }
 
-        #celebration { display: none; text-align: center; padding: 20px; }
-        .official-title { font-family: 'Dancing Script', cursive; font-size: 45px; color: white; margin-bottom: 15px; }
-        .final-msg {
-            background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(10px);
-            padding: 25px; border-radius: 20px; color: white; font-size: 18px; line-height: 1.6;
-            border: 1px solid rgba(255,255,255,0.3);
-        }
+        #celebration { display: none; text-align: center; color: white; }
+        .official-title { font-family: 'Dancing Script', cursive; font-size: 45px; }
     </style>
 </head>
 <body>
 
     <div id="main-content" class="container">
-        <img id="pookie-img" src="https://media.tenor.com/2m7VvY1iR_0AAAAi/milk-and-mocha.gif" alt="Asking">
+        <div class="pookie-container" id="pookie">
+            <div class="ear l"></div><div class="ear r"></div>
+            <div class="pookie-face" id="face">
+                <div class="eye l" id="el"></div><div class="eye r" id="er"></div>
+                <div class="blush l"></div><div class="blush r"></div>
+                <div class="mouth" id="m"></div>
+            </div>
+        </div>
         
         <h1 id="question">Will you be my valentine, Subbu? ✨</h1>
 
@@ -58,48 +74,41 @@
     </div>
 
     <div id="celebration">
-        <img src="https://media.tenor.com/866Bq1U6YpUAAAAi/milk-and-mocha.gif" style="width: 250px; margin-bottom: 20px;">
-        <div class="official-title">It's Official!</div>
-        <p class="final-msg">"Thanks for being the most wonderful, idiotic, sadistic and closest person to my heart ❤️!! Ofcourse you don't have choice of saying NO anymore ! You are stuck with me and me with you FOREVER!"</p>
+        <h1 class="official-title">It's Official! ❤️</h1>
+        <p style="background: rgba(255,255,255,0.2); padding: 20px; border-radius: 20px; line-height: 1.6;">
+            "Thanks for being the most wonderful, idiotic, sadistic and closest person to my heart ❤️!! Ofcourse you don't have choice of saying NO anymore ! You are stuck with me and me with you FOREVER!"
+        </p>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <script>
         let clickCount = 0;
-        
-        // These are the most stable "Direct" links for the woman bear's expressions
-        const womanGifs = [
-            "https://media.tenor.com/2m7VvY1iR_0AAAAi/milk-and-mocha.gif", // Asking
-            "https://media.tenor.com/9vD_S5S6f68AAAAi/milk-mocha.gif",    // Sad/Upset
-            "https://media.tenor.com/mO62L7-60fUAAAAi/milk-and-mocha.gif", // Crying
-            "https://media.tenor.com/X-f_B6vY57AAAAAi/milk-and-mocha.gif", // ANGRY
-            "https://media.tenor.com/p_uB-hYtC_IAAAAi/milk-and-mocha.gif"  // Despair
-        ];
-
-        const noPhrases = ["Are you sure?", "Pleaseeee🥹", "I'll be sad and kill you!!", "I know you want Yes!🥳", "Last Chance!"];
+        const noPhrases = ["Are you sure?", "Pleaseeee🥹", "I'll kill you!! 😡", "Just click Yes!🥳", "Last Chance!"];
 
         function handleNo() {
             clickCount++;
-            const pookie = document.getElementById('pookie-img');
+            const face = document.getElementById('face');
+            const mouth = document.getElementById('m');
             const yesBtn = document.getElementById('yesBtn');
             const noBtn = document.getElementById('noBtn');
 
-            // 1. Force GIF change
-            if (clickCount < womanGifs.length) {
-                pookie.src = womanGifs[clickCount];
+            // --- LIVE EXPRESSION CHANGES ---
+            if (clickCount === 1) { // SURPRISED
+                mouth.style.height = "12px"; mouth.style.width = "12px"; mouth.style.borderRadius = "50%";
+            } else if (clickCount === 2) { // SAD
+                face.style.transform = "translateY(10px)";
+                mouth.style.borderRadius = "10px 10px 0 0"; mouth.style.borderTop = "2px solid #333"; mouth.style.borderBottom = "0";
+            } else if (clickCount === 3) { // ANGRY
+                face.style.background = "#ffccd5";
+                document.getElementById('pookie').style.animation = "shake 0.1s infinite";
             }
 
-            // 2. Grow Yes Button
-            let size = 16 + (clickCount * 45);
+            // --- BUTTON LOGIC ---
+            let size = 16 + (clickCount * 40);
             yesBtn.style.fontSize = size + "px";
-            yesBtn.style.padding = (size/2) + "px " + (size) + "px";
+            yesBtn.style.padding = (size/2) + "px " + size + "px";
 
-            // 3. Update No button text
-            if (clickCount <= noPhrases.length) {
-                noBtn.innerText = noPhrases[clickCount-1];
-            }
-
-            // 4. Run away logic
+            if (clickCount <= noPhrases.length) noBtn.innerText = noPhrases[clickCount-1];
             if (clickCount >= 4) {
                 noBtn.style.position = 'fixed';
                 noBtn.style.left = Math.random() * 80 + '%';
@@ -111,7 +120,6 @@
             document.getElementById('main-content').style.display = 'none';
             document.getElementById('celebration').style.display = 'block';
             document.body.style.backgroundColor = "#d63384";
-            document.body.style.backgroundImage = "none";
             confetti({ particleCount: 200, spread: 100, origin: { y: 0.6 } });
         }
     </script>
