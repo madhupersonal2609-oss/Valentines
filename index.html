@@ -13,12 +13,13 @@
 
         body {
             background-color: var(--baby-pink);
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 100 100"><path d="M50 80c-20-15-30-25-30-35 0-10 10-15 15-15 5 0 10 5 15 10 5-5 10-10 15-10 5 0 15 5 15 15 0 10-10 20-30 35z" fill="%23ffb3c1" fill-opacity="0.5"/></svg>');
             font-family: 'Poppins', sans-serif;
             display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; overflow: hidden;
             transition: background 0.5s ease;
         }
 
-        /* Floating Hearts Animation */
+        /* Floating Hearts Layer */
         .heart {
             position: absolute; color: rgba(214, 51, 132, 0.4);
             animation: float 6s linear infinite; font-size: 20px; z-index: 1; pointer-events: none;
@@ -32,30 +33,24 @@
             background: rgba(255, 255, 255, 0.95);
             padding: 40px; border-radius: 40px; box-shadow: 0 20px 50px rgba(214, 51, 132, 0.2);
             text-align: center; width: 350px; z-index: 10; border: 2px solid white;
-            position: relative; overflow: hidden;
-        }
-
-        .bg-gif {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            object-fit: cover; opacity: 0.12; z-index: -1; pointer-events: none;
+            position: relative;
         }
 
         #pookie-img {
-            width: 180px; height: 180px; object-fit: contain; margin-bottom: 20px;
-            position: relative; z-index: 11;
+            width: 200px; height: 200px; object-fit: contain; margin-bottom: 20px;
         }
 
-        h1 { color: var(--deep-pink); font-size: 22px; margin-bottom: 30px; line-height: 1.4; position: relative; z-index: 11;}
+        h1 { color: var(--deep-pink); font-size: 22px; margin-bottom: 30px; line-height: 1.4; }
 
-        .buttons { display: flex; gap: 15px; justify-content: center; align-items: center; position: relative; z-index: 11;}
+        .buttons { display: flex; gap: 15px; justify-content: center; align-items: center; }
 
         button {
             padding: 12px 25px; font-size: 16px; border: none; border-radius: 50px;
             cursor: pointer; font-weight: 600; transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        #yesBtn { background-color: #28a745; color: white; box-shadow: 0 4px 15px rgba(40,167,69,0.3); }
-        #noBtn { background-color: #dc3545; color: white; position: relative; }
+        #yesBtn { background-color: #28a745; color: white; box-shadow: 0 4px 15px rgba(40,167,69,0.3); z-index: 100;}
+        #noBtn { background-color: #dc3545; color: white; position: relative; z-index: 99; }
 
         #celebration { display: none; text-align: center; color: white; padding: 20px; z-index: 20; }
         .official-title { font-family: 'Dancing Script', cursive; font-size: 50px; margin-bottom: 15px; }
@@ -71,8 +66,7 @@
     <div id="heart-container"></div>
 
     <div id="main-content" class="container">
-        <img class="bg-gif" src="https://media.tenor.com/On7be2S_T_wAAAAi/milk-and-mocha.gif">
-        <img id="pookie-img" src="https://media.tenor.com/7S8fC3J0LpMAAAAi/milk-and-mocha.gif" alt="Asking">
+        <img id="pookie-img" src="https://media.tenor.com/On7be2S_T_wAAAAi/milk-and-mocha.gif" alt="Asking">
         <h1 id="question">Will you be my valentine, Subbu? ✨</h1>
         <div class="buttons">
             <button id="yesBtn" onclick="celebrate()">Yes ! 😍</button>
@@ -92,6 +86,7 @@
     <script>
         let clickCount = 0;
 
+        // Heart generation logic
         function createHeart() {
             const container = document.getElementById('heart-container');
             const heart = document.createElement('div');
@@ -105,14 +100,22 @@
         setInterval(createHeart, 400);
         
         const womanGifs = [
-            "https://media.tenor.com/7S8fC3J0LpMAAAAi/milk-and-mocha.gif", 
+            "https://media.tenor.com/On7be2S_T_wAAAAi/milk-and-mocha.gif", 
             "https://media.tenor.com/HAn8V0K9MFAAAAAi/milk-and-mocha.gif", 
             "https://media.tenor.com/YpsD67L97HAAAAAi/milk-and-mocha.gif", 
             "https://media.tenor.com/97_1N86I19MAAAAi/milk-and-mocha.gif", 
             "https://media.tenor.com/uR6G-4T3_pYAAAAi/milk-and-mocha.gif"
         ];
 
-        const noPhrases = ["Are you sure?", "Pleaseeee🥹", "If you didn't click on Yes, I'll be sad and kill you!!", "I know you want Yes!🥳", "Last Chance!"];
+        const noPhrases = [
+            "Are you sure?", 
+            "Pleaseeee🥹", 
+            "If you didn't click on Yes, I'll be sad and kill you!!", 
+            "I know you want Yes!🥳", 
+            "Last Chance!", // 5th click
+            "Catch me if you can!", // 6th click
+            "Catch me if you can!"  // 7th click
+        ];
 
         function handleNo() {
             clickCount++;
@@ -120,29 +123,39 @@
             const noBtn = document.getElementById('noBtn');
             const pookie = document.getElementById('pookie-img');
 
+            // Character expression change logic
             if (clickCount < womanGifs.length) {
                 pookie.src = womanGifs[clickCount];
             }
 
-            // Noticeable but not aggressive growth
+            // Gradual Yes growth
             let yesSize = 16 + (clickCount * 12); 
             yesBtn.style.fontSize = yesSize + 'px';
             yesBtn.style.padding = (12 + clickCount * 4) + 'px ' + (25 + clickCount * 8) + 'px';
             
-            if (clickCount <= noPhrases.length) noBtn.innerText = noPhrases[clickCount - 1];
+            // Text update logic
+            if (clickCount <= noPhrases.length) {
+                noBtn.innerText = noPhrases[clickCount - 1];
+            }
             
-            if (clickCount >= 5) {
+            // Jumping logic for 6th and 7th clicks
+            if (clickCount >= 6 && clickCount <= 7) {
                 noBtn.style.position = 'fixed';
                 noBtn.style.left = Math.random() * 80 + '%';
                 noBtn.style.top = Math.random() * 80 + '%';
             }
-            if (clickCount >= 6) noBtn.style.display = 'none';
+
+            // Permanent disappearance on 8th click
+            if (clickCount >= 8) {
+                noBtn.style.display = 'none';
+            }
         }
 
         function celebrate() {
             document.getElementById('main-content').style.display = 'none';
             document.getElementById('celebration').style.display = 'block';
             document.body.style.backgroundColor = "#d63384";
+            document.body.style.backgroundImage = "none";
             
             var end = Date.now() + (4 * 1000);
             (function frame() {
