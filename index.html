@@ -56,7 +56,7 @@
 
         #celebration { 
             display: none; text-align: center; color: white; z-index: 20; 
-            background: rgba(0, 0, 0, 0.4); padding: 30px; border-radius: 30px;
+            background: rgba(0, 0, 0, 0.5); padding: 30px; border-radius: 30px;
             backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.2);
             max-width: 350px;
         }
@@ -106,13 +106,8 @@
         setInterval(createHeart, 300);
 
         const noPhrases = [
-            "Are you sure?", 
-            "Pleaseeee🥹", 
-            "If you didn't click on Yes, I'll be sad and kill you!!", 
-            "I know you want Yes!🥳", 
-            "Last Chance!", 
-            "Catch me if you can!", 
-            "Catch me if you can!"
+            "Are you sure?", "Pleaseeee🥹", "If you didn't click on Yes, I'll be sad and kill you!!", 
+            "I know you want Yes!🥳", "Last Chance!", "Catch me if you can!", "Catch me if you can!"
         ];
 
         function handleNo() {
@@ -120,17 +115,14 @@
             const yesBtn = document.getElementById('yesBtn');
             const noBtn = document.getElementById('noBtn');
 
-            // Gradual Yes growth
             let yesSize = 16 + (clickCount * 12); 
             yesBtn.style.fontSize = yesSize + 'px';
             yesBtn.style.padding = (12 + clickCount * 4) + 'px ' + (25 + clickCount * 8) + 'px';
             
-            // Text update
             if (clickCount <= noPhrases.length) {
                 noBtn.innerText = noPhrases[clickCount - 1];
             }
             
-            // Jumping logic (6th and 7th click)
             if (clickCount >= 6 && clickCount <= 7) {
                 noBtn.style.position = 'fixed';
                 const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
@@ -139,7 +131,6 @@
                 noBtn.style.top = Math.max(0, y) + 'px';
             }
 
-            // Disappear (8th click)
             if (clickCount >= 8) {
                 noBtn.style.display = 'none';
             }
@@ -150,11 +141,12 @@
             const celebDiv = document.getElementById('celebration');
             celebDiv.style.display = 'block';
             
-            // NEW ASSET: Sets your second GIF as the FULL BACKGROUND
+            // MODIFIED: backgroundSize set to contain to fit screen perfectly
             document.body.style.backgroundImage = "url('https://github.com/user-attachments/assets/f00d205a-8993-4b6f-acb6-12283dd3deb8')";
-            document.body.style.backgroundSize = "cover";
+            document.body.style.backgroundSize = "contain"; 
+            document.body.style.backgroundRepeat = "no-repeat";
             document.body.style.backgroundPosition = "center";
-            document.body.style.backgroundColor = "black";
+            document.body.style.backgroundColor = "black"; 
             
             const end = Date.now() + 5000;
             (function frame() {
