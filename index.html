@@ -16,6 +16,7 @@
             background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 100 100"><path d="M50 80c-20-15-30-25-30-35 0-10 10-15 15-15 5 0 10 5 15 10 5-5 10-10 15-10 5 0 15 5 15 15 0 10-10 20-30 35z" fill="%23ffb3c1" fill-opacity="0.4"/></svg>');
             font-family: 'Poppins', sans-serif;
             display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; overflow: hidden;
+            transition: background 0.8s ease;
         }
 
         .heart {
@@ -28,9 +29,10 @@
         }
 
         .container {
-            background: rgba(255, 255, 255, 0.98);
+            background: rgba(255, 255, 255, 0.9);
             padding: 40px; border-radius: 40px; box-shadow: 0 20px 50px rgba(214, 51, 132, 0.2);
             text-align: center; width: 320px; z-index: 10; border: 2px solid white;
+            backdrop-filter: blur(5px);
         }
 
         .gif-box {
@@ -52,12 +54,16 @@
         #yesBtn { background-color: #28a745; color: white; z-index: 100; }
         #noBtn { background-color: #dc3545; color: white; position: relative; z-index: 99; }
 
-        #celebration { display: none; text-align: center; color: white; padding: 20px; z-index: 20; }
-        .official-title { font-family: 'Dancing Script', cursive; font-size: 50px; margin-bottom: 15px; }
+        #celebration { 
+            display: none; text-align: center; color: white; z-index: 20; 
+            background: rgba(0, 0, 0, 0.3); padding: 30px; border-radius: 30px;
+            backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.2);
+            max-width: 350px;
+        }
+        .official-title { font-family: 'Dancing Script', cursive; font-size: 50px; margin-bottom: 15px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
         .final-msg {
-            background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(10px);
-            padding: 25px; border-radius: 20px; font-size: 18px; border: 1px solid rgba(255,255,255,0.3);
-            line-height: 1.6;
+            font-size: 18px; line-height: 1.6; font-weight: 400;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
         }
     </style>
 </head>
@@ -67,10 +73,7 @@
 
     <div id="main-content" class="container">
         <div class="gif-box">
-            <img id="pookie-img" 
-                 src="https://media1.tenor.com/m/On7be2S_T_wAAAAC/milk-and-mocha.gif" 
-                 referrerpolicy="no-referrer" 
-                 alt="Asking">
+            <img id="pookie-img" src="https://github.com/user-attachments/assets/e47efaf0-b6c5-4281-9f08-0aa093d4c87e" alt="Asking">
         </div>
         <h1 id="question">Will you be my valentine, Subbu? ✨</h1>
         <div class="buttons">
@@ -80,11 +83,6 @@
     </div>
 
     <div id="celebration">
-        <div class="gif-box">
-            <img src="https://media1.tenor.com/m/XqT_uU_o_XgAAAAC/milk-and-mocha.gif" 
-                 referrerpolicy="no-referrer" 
-                 style="border-radius: 20px; max-width: 100%;">
-        </div>
         <div class="official-title">It's Official!</div>
         <div class="final-msg">
             "Thanks for being the most wonderful, idiotic, sadistic and closest person to my heart ❤️!! Ofcourse you don't have choice of saying NO anymore ! You are stuck with me and me with you FOREVER!"
@@ -95,6 +93,7 @@
     <script>
         let clickCount = 0;
 
+        // Heart generation
         function createHeart() {
             const container = document.getElementById('heart-container');
             const heart = document.createElement('div');
@@ -106,15 +105,6 @@
             setTimeout(() => { heart.remove(); }, 5000);
         }
         setInterval(createHeart, 300);
-        
-        // High-stability links for GitHub Pages
-        const womanGifs = [
-            "https://media1.tenor.com/m/On7be2S_T_wAAAAC/milk-and-mocha.gif", 
-            "https://media1.tenor.com/m/HAn8V0K9MFAAAAAC/milk-and-mocha.gif", 
-            "https://media1.tenor.com/m/YpsD67L97HAAAAAC/milk-and-mocha.gif", 
-            "https://media1.tenor.com/m/97_1N86I19MAAAAAC/milk-and-mocha.gif", 
-            "https://media1.tenor.com/m/uR6G-4T3_pYAAAAC/milk-and-mocha.gif"
-        ];
 
         const noPhrases = [
             "Are you sure?", 
@@ -130,20 +120,18 @@
             clickCount++;
             const yesBtn = document.getElementById('yesBtn');
             const noBtn = document.getElementById('noBtn');
-            const pookie = document.getElementById('pookie-img');
 
-            if (clickCount < womanGifs.length) {
-                pookie.src = womanGifs[clickCount];
-            }
-
+            // Gradual Yes growth
             let yesSize = 16 + (clickCount * 12); 
             yesBtn.style.fontSize = yesSize + 'px';
             yesBtn.style.padding = (12 + clickCount * 4) + 'px ' + (25 + clickCount * 8) + 'px';
             
+            // Text update
             if (clickCount <= noPhrases.length) {
                 noBtn.innerText = noPhrases[clickCount - 1];
             }
             
+            // Jumping logic (6th and 7th click)
             if (clickCount >= 6 && clickCount <= 7) {
                 noBtn.style.position = 'fixed';
                 const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
@@ -152,6 +140,7 @@
                 noBtn.style.top = Math.max(0, y) + 'px';
             }
 
+            // Disappear (8th click)
             if (clickCount >= 8) {
                 noBtn.style.display = 'none';
             }
@@ -159,14 +148,20 @@
 
         function celebrate() {
             document.getElementById('main-content').style.display = 'none';
-            document.getElementById('celebration').style.display = 'block';
-            document.body.style.backgroundColor = "#d63384";
-            document.body.style.backgroundImage = "none";
+            const celebDiv = document.getElementById('celebration');
+            celebDiv.style.display = 'block';
             
-            const end = Date.now() + 4000;
+            // ASSET 2: Sets your second GIF as the FULL BACKGROUND
+            document.body.style.backgroundImage = "url('https://github.com/user-attachments/assets/9490c95d-4472-49c0-856f-b5d44463b4b2')";
+            document.body.style.backgroundSize = "cover";
+            document.body.style.backgroundPosition = "center";
+            document.body.style.backgroundColor = "black"; // Fallback
+            
+            // Confetti Cannon
+            const end = Date.now() + 5000;
             (function frame() {
-                confetti({ particleCount: 7, angle: 60, spread: 55, origin: { x: 0 }, colors: ['#ffffff', '#ffb3c1'] });
-                confetti({ particleCount: 7, angle: 120, spread: 55, origin: { x: 1 }, colors: ['#ffffff', '#ffb3c1'] });
+                confetti({ particleCount: 10, angle: 60, spread: 55, origin: { x: 0 }, colors: ['#ffffff', '#ffdae0', '#d63384'] });
+                confetti({ particleCount: 10, angle: 120, spread: 55, origin: { x: 1 }, colors: ['#ffffff', '#ffdae0', '#d63384'] });
                 if (Date.now() < end) requestAnimationFrame(frame);
             }());
         }
