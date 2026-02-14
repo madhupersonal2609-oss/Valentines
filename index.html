@@ -47,7 +47,7 @@
 <body>
 
     <div id="main-content" class="container">
-        <img id="pookie-img" src="https://media.tenor.com/7S8fC3J0LpMAAAAi/milk-and-mocha.gif" alt="Asking">
+        <img id="pookie-img" src="https://media.tenor.com/2m7VvY1iR_0AAAAi/milk-and-mocha.gif" alt="Asking">
         
         <h1 id="question">Will you be my valentine, Subbu? ✨</h1>
 
@@ -67,16 +67,16 @@
     <script>
         let clickCount = 0;
         
-        // WOMAN POOKIE EXPRESSIONS (Milk Bear)
+        // These are the most stable "Direct" links for the woman bear's expressions
         const womanGifs = [
-            "https://media.tenor.com/7S8fC3J0LpMAAAAi/milk-and-mocha.gif", // Asking
-            "https://media.tenor.com/HAn8V0K9MFAAAAAi/milk-and-mocha.gif", // Annoyed/Wait what?
-            "https://media.tenor.com/YpsD67L97HAAAAAi/milk-and-mocha.gif", // Crying/Sad
-            "https://media.tenor.com/97_1N86I19MAAAAi/milk-and-mocha.gif", // ANGRY (Menacing)
-            "https://media.tenor.com/uR6G-4T3_pYAAAAi/milk-and-mocha.gif"  // Tantrum/Panic
+            "https://media.tenor.com/2m7VvY1iR_0AAAAi/milk-and-mocha.gif", // Asking
+            "https://media.tenor.com/9vD_S5S6f68AAAAi/milk-mocha.gif",    // Sad/Upset
+            "https://media.tenor.com/mO62L7-60fUAAAAi/milk-and-mocha.gif", // Crying
+            "https://media.tenor.com/X-f_B6vY57AAAAAi/milk-and-mocha.gif", // ANGRY
+            "https://media.tenor.com/p_uB-hYtC_IAAAAi/milk-and-mocha.gif"  // Despair
         ];
 
-        const noPhrases = ["Are you sure?", "Pleaseeee🥹", "I'll be sad and kill you!!", "You want to click Yes!🥳", "Last Chance!"];
+        const noPhrases = ["Are you sure?", "Pleaseeee🥹", "I'll be sad and kill you!!", "I know you want Yes!🥳", "Last Chance!"];
 
         function handleNo() {
             clickCount++;
@@ -84,31 +84,26 @@
             const yesBtn = document.getElementById('yesBtn');
             const noBtn = document.getElementById('noBtn');
 
-            // 1. Swap GIFs
+            // 1. Force GIF change
             if (clickCount < womanGifs.length) {
                 pookie.src = womanGifs[clickCount];
             }
 
-            // 2. Growth
+            // 2. Grow Yes Button
             let size = 16 + (clickCount * 45);
             yesBtn.style.fontSize = size + "px";
             yesBtn.style.padding = (size/2) + "px " + (size) + "px";
 
-            // 3. Update Text
+            // 3. Update No button text
             if (clickCount <= noPhrases.length) {
                 noBtn.innerText = noPhrases[clickCount-1];
             }
 
-            // 4. Movement (Starts from Click 4)
+            // 4. Run away logic
             if (clickCount >= 4) {
                 noBtn.style.position = 'fixed';
                 noBtn.style.left = Math.random() * 80 + '%';
                 noBtn.style.top = Math.random() * 80 + '%';
-            }
-            
-            // 5. Hide button eventually
-            if (clickCount >= 6) {
-                noBtn.style.display = 'none';
             }
         }
 
