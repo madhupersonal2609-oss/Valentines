@@ -6,48 +6,72 @@
     <title>For Subbu 💖</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --pink: #ffdae0;
+            --dark-pink: #d63384;
+        }
+
         body {
-            background-color: #ffdae0;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 100 100"><path d="M50 80c-20-15-30-25-30-35 0-10 10-15 15-15 5 0 10 5 15 10 5-5 10-10 15-10 5 0 15 5 15 15 0 10-10 20-30 35z" fill="%23ffb3c1" fill-opacity="0.5"/></svg>');
+            background-color: var(--pink);
             font-family: 'Poppins', sans-serif;
             display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; overflow: hidden;
+        }
+
+        /* Floating Hearts Animation */
+        .heart {
+            position: absolute; color: rgba(214, 51, 132, 0.4);
+            animation: float 6s linear infinite; font-size: 20px; z-index: 1;
+        }
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
         }
 
         .container {
             background: rgba(255, 255, 255, 0.95);
             padding: 40px; border-radius: 40px; text-align: center; width: 350px; 
             box-shadow: 0 20px 50px rgba(214, 51, 132, 0.2); border: 2px solid white;
+            z-index: 10; position: relative;
         }
 
-        #pookie-img {
-            width: 180px; height: 180px; object-fit: contain; margin-bottom: 20px;
-        }
-
-        h1 { color: #d63384; font-size: 22px; margin-bottom: 30px; line-height: 1.4; }
+        /* The SVG Pookie Drawing */
+        .pookie-svg { width: 160px; height: 160px; margin-bottom: 10px; transition: all 0.3s ease; }
+        
+        h1 { color: var(--dark-pink); font-size: 20px; margin-bottom: 30px; line-height: 1.4; }
 
         .buttons { display: flex; gap: 15px; justify-content: center; align-items: center; }
-
         button {
             padding: 12px 25px; font-size: 16px; border: none; border-radius: 50px;
             cursor: pointer; font-weight: 600; transition: all 0.3s ease;
         }
 
-        #yesBtn { background-color: #28a745; color: white; }
+        #yesBtn { background-color: #28a745; color: white; z-index: 100; }
         #noBtn { background-color: #dc3545; color: white; position: relative; }
 
-        #celebration { display: none; text-align: center; padding: 20px; }
+        #celebration { display: none; text-align: center; padding: 20px; z-index: 20; }
         .official-title { font-family: 'Dancing Script', cursive; font-size: 45px; color: white; margin-bottom: 15px; }
         .final-msg {
             background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(10px);
-            padding: 25px; border-radius: 20px; color: white; font-size: 18px; line-height: 1.6;
+            padding: 25px; border-radius: 20px; color: white; font-size: 17px; line-height: 1.6;
             border: 1px solid rgba(255,255,255,0.3);
         }
     </style>
 </head>
 <body>
 
+    <div id="heart-container"></div>
+
     <div id="main-content" class="container">
-        <img id="pookie-img" src="https://media.tenor.com/7S8fC3J0LpMAAAAi/milk-and-mocha.gif" alt="Pookie Asking">
+        <svg class="pookie-svg" viewBox="0 0 100 100" id="pookie-art">
+            <circle cx="30" cy="30" r="12" fill="white" stroke="#333" stroke-width="2.5"/>
+            <circle cx="70" cy="30" r="12" fill="white" stroke="#333" stroke-width="2.5"/>
+            <circle cx="50" cy="55" r="38" fill="white" stroke="#333" stroke-width="2.5"/>
+            <circle id="eye-l" cx="38" cy="52" r="3.5" fill="#333"/>
+            <circle id="eye-r" cx="62" cy="52" r="3.5" fill="#333"/>
+            <path id="pookie-mouth" d="M45 62 Q50 68 55 62" fill="none" stroke="#333" stroke-width="2.5" stroke-linecap="round"/>
+            <circle cx="28" cy="60" r="6" fill="#ffb3c1" opacity="0.6"/>
+            <circle cx="72" cy="60" r="6" fill="#ffb3c1" opacity="0.6"/>
+        </svg>
         
         <h1 id="question">Will you be my valentine, Subbu? ✨</h1>
 
@@ -58,7 +82,7 @@
     </div>
 
     <div id="celebration">
-        <img src="https://media.tenor.com/866Bq1U6YpUAAAAi/milk-and-mocha.gif" style="width: 250px; margin-bottom: 20px;">
+        <div style="font-size: 80px; margin-bottom: 20px;">🧸❤️</div>
         <div class="official-title">It's Official!</div>
         <p class="final-msg">"Thanks for being the most wonderful, idiotic, sadistic and closest person to my heart ❤️!! Ofcourse you don't have choice of saying NO anymore ! You are stuck with me and me with you FOREVER!"</p>
     </div>
@@ -67,16 +91,7 @@
     <script>
         let clickCount = 0;
         
-        // WOMAN POOKIE EXPRESSIONS (Milk Bear)
-        const womanGifs = [
-            "https://media.tenor.com/7S8fC3J0LpMAAAAi/milk-and-mocha.gif", // Start
-            "https://media.tenor.com/HAn8V0K9MFAAAAAi/milk-and-mocha.gif", // Confused
-            "https://media.tenor.com/YpsD67L97HAAAAAi/milk-and-mocha.gif", // Sad
-            "https://media.tenor.com/97_1N86I19MAAAAi/milk-and-mocha.gif", // Angry
-            "https://media.tenor.com/uR6G-4T3_pYAAAAi/milk-and-mocha.gif"  // Tantrum
-        ];
-
-        // RESTORED YOUR EXACT PHRASES
+        // Exact restored phrases
         const noPhrases = [
             "Are you sure ?????", 
             "Pleaseeeeeeeee🥹", 
@@ -85,28 +100,50 @@
             "Last Chance !!!!"
         ];
 
+        // Background Hearts
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 3 + 's';
+            document.getElementById('heart-container').appendChild(heart);
+            setTimeout(() => { heart.remove(); }, 6000);
+        }
+        setInterval(createHeart, 400);
+
         function handleNo() {
             clickCount++;
-            const pookie = document.getElementById('pookie-img');
             const yesBtn = document.getElementById('yesBtn');
             const noBtn = document.getElementById('noBtn');
+            const mouth = document.getElementById('pookie-mouth');
+            const eyeL = document.getElementById('eye-l');
+            const eyeR = document.getElementById('eye-r');
+            const pookieArt = document.getElementById('pookie-art');
 
-            // 1. Swap GIFs for the "Live Expression" feel
-            if (clickCount < womanGifs.length) {
-                pookie.src = womanGifs[clickCount];
+            // --- EXPRESSION CHANGES ---
+            if (clickCount === 1) { // Surprised
+                mouth.setAttribute("d", "M47 68 Q50 72 53 68"); 
+                eyeL.setAttribute("r", "5"); eyeR.setAttribute("r", "5");
+            } else if (clickCount === 2) { // Sad Frown
+                mouth.setAttribute("d", "M44 70 Q50 62 56 70");
+                pookieArt.style.transform = "translateY(10px) rotate(-5deg)";
+            } else if (clickCount === 3) { // Angry / Red
+                pookieArt.style.filter = "sepia(1) saturate(10) hue-rotate(-50deg)";
+                mouth.setAttribute("d", "M42 66 L58 66"); 
             }
 
-            // 2. Make Yes Button Grow
+            // --- YES BUTTON GROWS ---
             let size = 16 + (clickCount * 45);
             yesBtn.style.fontSize = size + "px";
             yesBtn.style.padding = (size/2) + "px " + size + "px";
 
-            // 3. Update No button text to your phrases
+            // --- UPDATE TEXT ---
             if (clickCount <= noPhrases.length) {
                 noBtn.innerText = noPhrases[clickCount-1];
             }
 
-            // 4. No Button starts running away
+            // --- RUN AWAY ---
             if (clickCount >= 5) {
                 noBtn.style.position = 'fixed';
                 noBtn.style.left = Math.random() * 80 + '%';
@@ -118,7 +155,6 @@
             document.getElementById('main-content').style.display = 'none';
             document.getElementById('celebration').style.display = 'block';
             document.body.style.backgroundColor = "#d63384";
-            document.body.style.backgroundImage = "none";
             confetti({ particleCount: 200, spread: 100, origin: { y: 0.6 } });
         }
     </script>
