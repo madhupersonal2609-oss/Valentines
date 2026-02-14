@@ -20,8 +20,7 @@
         }
 
         #pookie-img {
-            width: 200px; height: 200px; object-fit: contain; margin-bottom: 20px;
-            border-radius: 15px;
+            width: 180px; height: 180px; object-fit: contain; margin-bottom: 20px;
         }
 
         h1 { color: #d63384; font-size: 22px; margin-bottom: 30px; line-height: 1.4; }
@@ -37,7 +36,7 @@
         #noBtn { background-color: #dc3545; color: white; position: relative; }
 
         #celebration { display: none; text-align: center; padding: 20px; }
-        .official-title { font-family: 'Dancing Script', cursive; font-size: 50px; color: white; margin-bottom: 15px; }
+        .official-title { font-family: 'Dancing Script', cursive; font-size: 45px; color: white; margin-bottom: 15px; }
         .final-msg {
             background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(10px);
             padding: 25px; border-radius: 20px; color: white; font-size: 18px; line-height: 1.6;
@@ -48,7 +47,7 @@
 <body>
 
     <div id="main-content" class="container">
-        <img id="pookie-img" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHp3bm8xZ3ZpdmR3eHR4eHR4eHR4eHR4eHR4eHR4eHR4eHR4eHR4ZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/cLS1cfxvGOPVpf9g3y/giphy.gif" alt="Asking">
+        <img id="pookie-img" src="https://media.tenor.com/7S8fC3J0LpMAAAAi/milk-and-mocha.gif" alt="Asking">
         
         <h1 id="question">Will you be my valentine, Subbu? ✨</h1>
 
@@ -59,7 +58,7 @@
     </div>
 
     <div id="celebration">
-        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHp3bm8xZ3ZpdmR3eHR4eHR4eHR4eHR4eHR4eHR4eHR4eHR4eHR4ZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/Y9N8N5PzT0z0Y/giphy.gif" style="width: 250px; margin-bottom: 20px;">
+        <img src="https://media.tenor.com/866Bq1U6YpUAAAAi/milk-and-mocha.gif" style="width: 250px; margin-bottom: 20px;">
         <div class="official-title">It's Official!</div>
         <p class="final-msg">"Thanks for being the most wonderful, idiotic, sadistic and closest person to my heart ❤️!! Ofcourse you don't have choice of saying NO anymore ! You are stuck with me and me with you FOREVER!"</p>
     </div>
@@ -68,13 +67,13 @@
     <script>
         let clickCount = 0;
         
-        // These are the woman's expressions: Asking -> Sad -> Crying -> Angry -> Rage
+        // WOMAN POOKIE EXPRESSIONS (Milk Bear)
         const womanGifs = [
-            "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHp3bm8xZ3ZpdmR3eHR4eHR4eHR4eHR4eHR4eHR4eHR4eHR4eHR4ZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/cLS1cfxvGOPVpf9g3y/giphy.gif",
-            "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHp3bm8xZ3ZpdmR3eHR4eHR4eHR4eHR4eHR4eHR4eHR4eHR4eHR4ZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/L95W4wv8nnb9V0W1Qu/giphy.gif",
-            "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHp3bm8xZ3ZpdmR3eHR4eHR4eHR4eHR4eHR4eHR4eHR4eHR4eHR4ZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/OPU6wYfV5InyJdMd6K/giphy.gif",
-            "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHp3bm8xZ3ZpdmR3eHR4eHR4eHR4eHR4eHR4eHR4eHR4eHR4eHR4ZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/llsq863S41l3cWEnT0/giphy.gif",
-            "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHp3bm8xZ3ZpdmR3eHR4eHR4eHR4eHR4eHR4eHR4eHR4eHR4eHR4ZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/vVzH2Li3WdmEy9WnmS/giphy.gif"
+            "https://media.tenor.com/7S8fC3J0LpMAAAAi/milk-and-mocha.gif", // Asking
+            "https://media.tenor.com/HAn8V0K9MFAAAAAi/milk-and-mocha.gif", // Annoyed/Wait what?
+            "https://media.tenor.com/YpsD67L97HAAAAAi/milk-and-mocha.gif", // Crying/Sad
+            "https://media.tenor.com/97_1N86I19MAAAAi/milk-and-mocha.gif", // ANGRY (Menacing)
+            "https://media.tenor.com/uR6G-4T3_pYAAAAi/milk-and-mocha.gif"  // Tantrum/Panic
         ];
 
         const noPhrases = ["Are you sure?", "Pleaseeee🥹", "I'll be sad and kill you!!", "You want to click Yes!🥳", "Last Chance!"];
@@ -85,26 +84,31 @@
             const yesBtn = document.getElementById('yesBtn');
             const noBtn = document.getElementById('noBtn');
 
-            // 1. Force the image to update immediately
+            // 1. Swap GIFs
             if (clickCount < womanGifs.length) {
                 pookie.src = womanGifs[clickCount];
             }
 
-            // 2. Grow the green button
-            let size = 16 + (clickCount * 40);
+            // 2. Growth
+            let size = 16 + (clickCount * 45);
             yesBtn.style.fontSize = size + "px";
             yesBtn.style.padding = (size/2) + "px " + (size) + "px";
 
-            // 3. Update No button text
+            // 3. Update Text
             if (clickCount <= noPhrases.length) {
                 noBtn.innerText = noPhrases[clickCount-1];
             }
 
-            // 4. Make No button run away
+            // 4. Movement (Starts from Click 4)
             if (clickCount >= 4) {
                 noBtn.style.position = 'fixed';
                 noBtn.style.left = Math.random() * 80 + '%';
                 noBtn.style.top = Math.random() * 80 + '%';
+            }
+            
+            // 5. Hide button eventually
+            if (clickCount >= 6) {
+                noBtn.style.display = 'none';
             }
         }
 
@@ -113,7 +117,7 @@
             document.getElementById('celebration').style.display = 'block';
             document.body.style.backgroundColor = "#d63384";
             document.body.style.backgroundImage = "none";
-            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+            confetti({ particleCount: 200, spread: 100, origin: { y: 0.6 } });
         }
     </script>
 </body>
