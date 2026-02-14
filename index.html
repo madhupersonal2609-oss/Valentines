@@ -4,15 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>For Subbu 💖</title>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --baby-pink: #ffdae0;
-            --deep-pink: #d63384;
-        }
-
         body {
-            background-color: var(--baby-pink);
+            background-color: #ffdae0;
             background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 100 100"><path d="M50 80c-20-15-30-25-30-35 0-10 10-15 15-15 5 0 10 5 15 10 5-5 10-10 15-10 5 0 15 5 15 15 0 10-10 20-30 35z" fill="%23ffb3c1" fill-opacity="0.5"/></svg>');
             font-family: 'Poppins', sans-serif;
             display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; overflow: hidden;
@@ -20,59 +15,39 @@
 
         .container {
             background: rgba(255, 255, 255, 0.95);
-            padding: 40px; border-radius: 40px; box-shadow: 0 20px 50px rgba(214, 51, 132, 0.15);
-            text-align: center; width: 350px; z-index: 10;
+            padding: 40px; border-radius: 40px; text-align: center; width: 350px; 
+            box-shadow: 0 20px 50px rgba(214, 51, 132, 0.2); border: 2px solid white;
         }
 
-        /* Interactive Image Animation */
         #pookie-img {
-            width: 200px;
-            height: 200px;
-            object-fit: contain;
-            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-            animation: breathe 3s ease-in-out infinite;
+            width: 180px; height: 180px; object-fit: contain; margin-bottom: 20px;
         }
 
-        /* Breathing/Life Animation */
-        @keyframes breathe {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-
-        /* Emotional States */
-        .distorted-sad { transform: scale(0.8, 1.2) !important; filter: grayscale(100%); }
-        .distorted-angry { transform: scale(1.3, 0.8) !important; filter: hue-rotate(320deg) saturate(3); }
-        .shake-fast { animation: shake 0.1s infinite !important; }
-
-        @keyframes shake {
-            0% { transform: translate(2px, 2px); }
-            50% { transform: translate(-2px, -2px); }
-            100% { transform: translate(2px, 2px); }
-        }
-
-        h1 { color: var(--deep-pink); font-size: 22px; margin-bottom: 30px; }
+        h1 { color: #d63384; font-size: 22px; margin-bottom: 30px; line-height: 1.4; }
 
         .buttons { display: flex; gap: 15px; justify-content: center; align-items: center; }
 
         button {
             padding: 12px 25px; font-size: 16px; border: none; border-radius: 50px;
-            cursor: pointer; font-weight: 600; transition: all 0.2s ease;
+            cursor: pointer; font-weight: 600; transition: all 0.3s ease;
         }
 
         #yesBtn { background-color: #28a745; color: white; }
         #noBtn { background-color: #dc3545; color: white; position: relative; }
 
-        #celebration { display: none; text-align: center; color: white; }
+        #celebration { display: none; text-align: center; padding: 20px; }
+        .official-title { font-family: 'Dancing Script', cursive; font-size: 45px; color: white; margin-bottom: 15px; }
         .final-msg {
             background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(10px);
-            padding: 25px; border-radius: 20px; font-size: 18px; border: 1px solid rgba(255,255,255,0.3);
+            padding: 25px; border-radius: 20px; color: white; font-size: 18px; line-height: 1.6;
+            border: 1px solid rgba(255,255,255,0.3);
         }
     </style>
 </head>
 <body>
 
     <div id="main-content" class="container">
-        <img id="pookie-img" src="pookie.png" alt="Pookie">
+        <img id="pookie-img" src="https://media.tenor.com/7S8fC3J0LpMAAAAi/milk-and-mocha.gif" alt="Pookie Asking">
         
         <h1 id="question">Will you be my valentine, Subbu? ✨</h1>
 
@@ -83,45 +58,60 @@
     </div>
 
     <div id="celebration">
-        <div style="font-size: 100px; margin-bottom: 20px;">🎉💖</div>
-        <h2 style="font-family: 'Dancing Script'; font-size: 45px;">It's Official!</h2>
-        <div class="final-msg">
-            "Thanks for being the most wonderful, idiotic, sadistic and closest person to my heart ❤️!! Ofcourse you don't have choice of saying NO anymore ! You are stuck with me and me with you FOREVER!"
-        </div>
+        <img src="https://media.tenor.com/866Bq1U6YpUAAAAi/milk-and-mocha.gif" style="width: 250px; margin-bottom: 20px;">
+        <div class="official-title">It's Official!</div>
+        <p class="final-msg">"Thanks for being the most wonderful, idiotic, sadistic and closest person to my heart ❤️!! Ofcourse you don't have choice of saying NO anymore ! You are stuck with me and me with you FOREVER!"</p>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <script>
         let clickCount = 0;
-        const noPhrases = ["Are you sure?", "Pleaseeee🥹", "I'll be sad and kill you!!", "I know you want Yes!🥳", "Last Chance!"];
+        
+        // WOMAN POOKIE EXPRESSIONS (Milk Bear)
+        const womanGifs = [
+            "https://media.tenor.com/7S8fC3J0LpMAAAAi/milk-and-mocha.gif", // Start
+            "https://media.tenor.com/HAn8V0K9MFAAAAAi/milk-and-mocha.gif", // Confused
+            "https://media.tenor.com/YpsD67L97HAAAAAi/milk-and-mocha.gif", // Sad
+            "https://media.tenor.com/97_1N86I19MAAAAi/milk-and-mocha.gif", // Angry
+            "https://media.tenor.com/uR6G-4T3_pYAAAAi/milk-and-mocha.gif"  // Tantrum
+        ];
+
+        // RESTORED YOUR EXACT PHRASES
+        const noPhrases = [
+            "Are you sure ?????", 
+            "Pleaseeeeeeeee🥹", 
+            "If you say no, I will be sad and will kill you!!!!", 
+            "I know you want to click Yes !!!!🥳", 
+            "Last Chance !!!!"
+        ];
 
         function handleNo() {
             clickCount++;
+            const pookie = document.getElementById('pookie-img');
             const yesBtn = document.getElementById('yesBtn');
             const noBtn = document.getElementById('noBtn');
-            const pookie = document.getElementById('pookie-img');
 
-            // --- THE PHYSICAL EXPRESSION LOGIC ---
-            if (clickCount === 1) {
-                pookie.style.transform = "rotate(-20deg)"; // Confused tilt
-            } else if (clickCount === 2) {
-                pookie.className = "distorted-sad"; // Long and thin (Sad look)
-            } else if (clickCount === 3) {
-                pookie.className = "distorted-angry shake-fast"; // Short and wide (Angry look)
+            // 1. Swap GIFs for the "Live Expression" feel
+            if (clickCount < womanGifs.length) {
+                pookie.src = womanGifs[clickCount];
             }
 
-            // --- BUTTON LOGIC ---
-            let yesSize = 16 + (clickCount * 45); 
-            yesBtn.style.fontSize = yesSize + 'px';
-            yesBtn.style.padding = (15 + clickCount * 15) + 'px ' + (30 + clickCount * 30) + 'px';
-            
-            if (clickCount <= noPhrases.length) noBtn.innerText = noPhrases[clickCount - 1];
+            // 2. Make Yes Button Grow
+            let size = 16 + (clickCount * 45);
+            yesBtn.style.fontSize = size + "px";
+            yesBtn.style.padding = (size/2) + "px " + size + "px";
+
+            // 3. Update No button text to your phrases
+            if (clickCount <= noPhrases.length) {
+                noBtn.innerText = noPhrases[clickCount-1];
+            }
+
+            // 4. No Button starts running away
             if (clickCount >= 5) {
                 noBtn.style.position = 'fixed';
-                noBtn.style.left = Math.random() * 70 + '%';
-                noBtn.style.top = Math.random() * 70 + '%';
+                noBtn.style.left = Math.random() * 80 + '%';
+                noBtn.style.top = Math.random() * 80 + '%';
             }
-            if (clickCount >= 6) noBtn.style.display = 'none';
         }
 
         function celebrate() {
@@ -129,7 +119,7 @@
             document.getElementById('celebration').style.display = 'block';
             document.body.style.backgroundColor = "#d63384";
             document.body.style.backgroundImage = "none";
-            confetti({ particleCount: 200, spread: 90, origin: { y: 0.6 } });
+            confetti({ particleCount: 200, spread: 100, origin: { y: 0.6 } });
         }
     </script>
 </body>
