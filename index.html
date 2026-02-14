@@ -56,7 +56,7 @@
 
         #celebration { 
             display: none; text-align: center; color: white; z-index: 20; 
-            background: rgba(0, 0, 0, 0.3); padding: 30px; border-radius: 30px;
+            background: rgba(0, 0, 0, 0.4); padding: 30px; border-radius: 30px;
             backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.2);
             max-width: 350px;
         }
@@ -73,7 +73,7 @@
 
     <div id="main-content" class="container">
         <div class="gif-box">
-            <img id="pookie-img" src="https://github.com/user-attachments/assets/e47efaf0-b6c5-4281-9f08-0aa093d4c87e" alt="Asking">
+            <img id="pookie-img" src="https://github.com/user-attachments/assets/98aeb162-7348-4808-a5cc-fdf2edccf43c" alt="Asking">
         </div>
         <h1 id="question">Will you be my valentine, Subbu? ✨</h1>
         <div class="buttons">
@@ -93,7 +93,6 @@
     <script>
         let clickCount = 0;
 
-        // Heart generation
         function createHeart() {
             const container = document.getElementById('heart-container');
             const heart = document.createElement('div');
@@ -151,13 +150,12 @@
             const celebDiv = document.getElementById('celebration');
             celebDiv.style.display = 'block';
             
-            // ASSET 2: Sets your second GIF as the FULL BACKGROUND
-            document.body.style.backgroundImage = "url('https://github.com/user-attachments/assets/9490c95d-4472-49c0-856f-b5d44463b4b2')";
+            // NEW ASSET: Sets your second GIF as the FULL BACKGROUND
+            document.body.style.backgroundImage = "url('https://github.com/user-attachments/assets/f00d205a-8993-4b6f-acb6-12283dd3deb8')";
             document.body.style.backgroundSize = "cover";
             document.body.style.backgroundPosition = "center";
-            document.body.style.backgroundColor = "black"; // Fallback
+            document.body.style.backgroundColor = "black";
             
-            // Confetti Cannon
             const end = Date.now() + 5000;
             (function frame() {
                 confetti({ particleCount: 10, angle: 60, spread: 55, origin: { x: 0 }, colors: ['#ffffff', '#ffdae0', '#d63384'] });
