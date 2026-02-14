@@ -13,13 +13,14 @@
 
         body {
             background-color: var(--baby-pink);
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 100 100"><path d="M50 80c-20-15-30-25-30-35 0-10 10-15 15-15 5 0 10 5 15 10 5-5 10-10 15-10 5 0 15 5 15 15 0 10-10 20-30 35z" fill="%23ffb3c1" fill-opacity="0.5"/></svg>');
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 100 100"><path d="M50 80c-20-15-30-25-30-35 0-10 10-15 15-15 5 0 10 5 15 10 5-5 10-10 15-10 5 0 15 5 15 15 0 10-10 20-30 35z" fill="%23ffb3c1" fill-opacity="0.4"/></svg>');
             font-family: 'Poppins', sans-serif;
             display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; overflow: hidden;
         }
 
+        /* Floating Hearts Animation */
         .heart {
-            position: absolute; color: rgba(214, 51, 132, 0.4);
+            position: absolute; color: rgba(214, 51, 132, 0.5);
             animation: float 6s linear infinite; font-size: 20px; z-index: 1; pointer-events: none;
         }
         @keyframes float {
@@ -29,32 +30,36 @@
 
         .container {
             background: rgba(255, 255, 255, 0.98);
-            padding: 30px; border-radius: 40px; box-shadow: 0 20px 50px rgba(214, 51, 132, 0.2);
-            text-align: center; width: 320px; z-index: 10; border: 3px solid white;
-            position: relative;
+            padding: 40px; border-radius: 40px; box-shadow: 0 20px 50px rgba(214, 51, 132, 0.2);
+            text-align: center; width: 320px; z-index: 10; border: 2px solid white;
+        }
+
+        /* Fixed height container for the GIF to prevent layout jumping */
+        .gif-box {
+            width: 100%; height: 200px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;
         }
 
         #pookie-img {
-            width: 200px; height: 200px; object-fit: contain; margin-bottom: 20px;
-            display: block; margin-left: auto; margin-right: auto;
+            max-width: 100%; max-height: 100%; object-fit: contain;
         }
 
-        h1 { color: var(--deep-pink); font-size: 20px; margin-bottom: 25px; line-height: 1.4; }
-        .buttons { display: flex; gap: 10px; justify-content: center; align-items: center; }
+        h1 { color: var(--deep-pink); font-size: 22px; margin-bottom: 30px; line-height: 1.4; }
+        .buttons { display: flex; gap: 15px; justify-content: center; align-items: center; }
 
         button {
             padding: 12px 25px; font-size: 16px; border: none; border-radius: 50px;
-            cursor: pointer; font-weight: 600; transition: all 0.2s ease;
+            cursor: pointer; font-weight: 600; transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        #yesBtn { background-color: #28a745; color: white; }
-        #noBtn { background-color: #dc3545; color: white; position: relative; }
+        #yesBtn { background-color: #28a745; color: white; z-index: 100; }
+        #noBtn { background-color: #dc3545; color: white; position: relative; z-index: 99; }
 
-        #celebration { display: none; text-align: center; color: white; z-index: 20; }
-        .official-title { font-family: 'Dancing Script', cursive; font-size: 45px; margin-bottom: 10px; }
+        #celebration { display: none; text-align: center; color: white; padding: 20px; z-index: 20; }
+        .official-title { font-family: 'Dancing Script', cursive; font-size: 50px; margin-bottom: 15px; }
         .final-msg {
             background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(10px);
-            padding: 20px; border-radius: 20px; font-size: 16px; line-height: 1.5;
+            padding: 25px; border-radius: 20px; font-size: 18px; border: 1px solid rgba(255,255,255,0.3);
+            line-height: 1.6;
         }
     </style>
 </head>
@@ -63,7 +68,9 @@
     <div id="heart-container"></div>
 
     <div id="main-content" class="container">
-        <img id="pookie-img" src="https://media.tenor.com/On7be2S_T_wAAAAi/milk-and-mocha.gif" alt="Asking Animation">
+        <div class="gif-box">
+            <img id="pookie-img" src="https://media1.tenor.com/m/On7be2S_T_wAAAAC/milk-and-mocha.gif" alt="Asking">
+        </div>
         <h1 id="question">Will you be my valentine, Subbu? ✨</h1>
         <div class="buttons">
             <button id="yesBtn" onclick="celebrate()">Yes ! 😍</button>
@@ -72,7 +79,9 @@
     </div>
 
     <div id="celebration">
-        <img src="https://media.tenor.com/XqT_uU_o_XgAAAAi/milk-and-mocha.gif" style="width: 250px; border-radius: 20px; margin-bottom: 20px;">
+        <div class="gif-box">
+            <img src="https://media1.tenor.com/m/XqT_uU_o_XgAAAAC/milk-and-mocha.gif" style="border-radius: 20px;">
+        </div>
         <div class="official-title">It's Official!</div>
         <div class="final-msg">
             "Thanks for being the most wonderful, idiotic, sadistic and closest person to my heart ❤️!! Ofcourse you don't have choice of saying NO anymore ! You are stuck with me and me with you FOREVER!"
@@ -89,23 +98,29 @@
             heart.classList.add('heart');
             heart.innerHTML = '❤️';
             heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+            heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
             container.appendChild(heart);
-            setTimeout(() => { heart.remove(); }, 6000);
+            setTimeout(() => { heart.remove(); }, 5000);
         }
-        setInterval(createHeart, 400);
+        setInterval(createHeart, 300);
         
+        // RAW MEDIA LINKS FOR BETTER GITHUB PAGES LOADING
         const womanGifs = [
-            "https://media.tenor.com/On7be2S_T_wAAAAi/milk-and-mocha.gif", 
-            "https://media.tenor.com/HAn8V0K9MFAAAAAi/milk-and-mocha.gif", 
-            "https://media.tenor.com/YpsD67L97HAAAAAi/milk-and-mocha.gif", 
-            "https://media.tenor.com/97_1N86I19MAAAAi/milk-and-mocha.gif", 
-            "https://media.tenor.com/uR6G-4T3_pYAAAAi/milk-and-mocha.gif"
+            "https://media1.tenor.com/m/On7be2S_T_wAAAAC/milk-and-mocha.gif", 
+            "https://media1.tenor.com/m/HAn8V0K9MFAAAAAC/milk-and-mocha.gif", 
+            "https://media1.tenor.com/m/YpsD67L97HAAAAAC/milk-and-mocha.gif", 
+            "https://media1.tenor.com/m/97_1N86I19MAAAAAC/milk-and-mocha.gif", 
+            "https://media1.tenor.com/m/uR6G-4T3_pYAAAAC/milk-and-mocha.gif"
         ];
 
         const noPhrases = [
-            "Are you sure?", "Pleaseeee🥹", "If you didn't click on Yes, I'll be sad and kill you!!", 
-            "I know you want Yes!🥳", "Last Chance!", "Catch me if you can!", "Catch me if you can!"
+            "Are you sure?", 
+            "Pleaseeee🥹", 
+            "If you didn't click on Yes, I'll be sad and kill you!!", 
+            "I know you want Yes!🥳", 
+            "Last Chance!", 
+            "Catch me if you can!", 
+            "Catch me if you can!"
         ];
 
         function handleNo() {
@@ -126,12 +141,16 @@
                 noBtn.innerText = noPhrases[clickCount - 1];
             }
             
+            // JUMPING LOGIC (6th and 7th click)
             if (clickCount >= 6 && clickCount <= 7) {
                 noBtn.style.position = 'fixed';
-                noBtn.style.left = Math.random() * 80 + '%';
-                noBtn.style.top = Math.random() * 80 + '%';
+                const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+                const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+                noBtn.style.left = x + 'px';
+                noBtn.style.top = y + 'px';
             }
 
+            // DISAPPEAR (8th click)
             if (clickCount >= 8) {
                 noBtn.style.display = 'none';
             }
@@ -143,11 +162,11 @@
             document.body.style.backgroundColor = "#d63384";
             document.body.style.backgroundImage = "none";
             
-            var end = Date.now() + (4 * 1000);
+            const end = Date.now() + 4000;
             (function frame() {
-                confetti({ particleCount: 5, angle: 60, spread: 55, origin: { x: 0 }, colors: ['#ffffff', '#ffb3c1'] });
-                confetti({ particleCount: 5, angle: 120, spread: 55, origin: { x: 1 }, colors: ['#ffffff', '#ffb3c1'] });
-                if (Date.now() < end) { requestAnimationFrame(frame); }
+                confetti({ particleCount: 7, angle: 60, spread: 55, origin: { x: 0 }, colors: ['#ffffff', '#ffb3c1'] });
+                confetti({ particleCount: 7, angle: 120, spread: 55, origin: { x: 1 }, colors: ['#ffffff', '#ffb3c1'] });
+                if (Date.now() < end) requestAnimationFrame(frame);
             }());
         }
     </script>
