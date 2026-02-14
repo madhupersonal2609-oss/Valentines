@@ -18,7 +18,7 @@
             transition: background 0.5s ease;
         }
 
-        /* Floating Hearts Animation */
+        /* Floating Hearts Layer */
         .heart {
             position: absolute;
             color: rgba(214, 51, 132, 0.5);
@@ -40,6 +40,7 @@
 
         #pookie-img {
             width: 180px; height: 180px; object-fit: contain; margin-bottom: 20px;
+            transition: transform 0.3s ease;
         }
 
         h1 { color: var(--deep-pink); font-size: 22px; margin-bottom: 30px; line-height: 1.4; }
@@ -51,7 +52,7 @@
             cursor: pointer; font-weight: 600; transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        #yesBtn { background-color: #28a745; color: white; box-shadow: 0 4px 15px rgba(40,167,69,0.3); position: relative; z-index: 100; }
+        #yesBtn { background-color: #28a745; color: white; box-shadow: 0 4px 15px rgba(40,167,69,0.3); position: relative; z-index: 100;}
         #noBtn { background-color: #dc3545; color: white; position: relative; }
 
         #celebration { display: none; text-align: center; color: white; padding: 20px; z-index: 20; }
@@ -103,6 +104,7 @@
         }
         setInterval(createHeart, 400);
         
+        // Progression Gifs from Tenor (Higher success rate than Giphy on GH Pages)
         const womanGifs = [
             "https://media.tenor.com/7S8fC3J0LpMAAAAi/milk-and-mocha.gif", 
             "https://media.tenor.com/HAn8V0K9MFAAAAAi/milk-and-mocha.gif", 
@@ -152,3 +154,4 @@
     </script>
 </body>
 </html>
+
