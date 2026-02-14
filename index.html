@@ -18,7 +18,7 @@
             transition: background 0.5s ease;
         }
 
-        /* Floating Hearts Animation */
+        /* Floating Hearts Layer */
         .heart {
             position: absolute; color: rgba(214, 51, 132, 0.4);
             animation: float 6s linear infinite; font-size: 20px; z-index: 1;
@@ -47,7 +47,7 @@
             cursor: pointer; font-weight: 600; transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        #yesBtn { background-color: #28a745; color: white; box-shadow: 0 4px 15px rgba(40,167,69,0.3); position: relative; z-index: 100; }
+        #yesBtn { background-color: #28a745; color: white; box-shadow: 0 4px 15px rgba(40,167,69,0.3); }
         #noBtn { background-color: #dc3545; color: white; position: relative; }
 
         #celebration { display: none; text-align: center; color: white; padding: 20px; z-index: 20; }
@@ -75,7 +75,7 @@
     </div>
 
     <div id="celebration">
-        <img src="https://media.tenor.com/XqT_uU_o_XgAAAAi/milk-and-mocha.gif" style="width: 250px; border-radius: 20px; margin-bottom: 20px;">
+        <img src="https://media.tenor.com/7f_47K-I360AAAAi/milk-and-mocha.gif" style="width: 250px; border-radius: 20px; margin-bottom: 20px;">
         <div class="official-title">It's Official!</div>
         <div class="final-msg">
             "Thanks for being the most wonderful, idiotic, sadistic and closest person to my heart ❤️!! Ofcourse you don't have choice of saying NO anymore ! You are stuck with me and me with you FOREVER!"
@@ -86,7 +86,7 @@
     <script>
         let clickCount = 0;
 
-        // Background Hearts Logic
+        // Background Hearts logic
         function createHeart() {
             const heart = document.createElement('div');
             heart.classList.add('heart');
@@ -98,16 +98,15 @@
         }
         setInterval(createHeart, 400);
         
-        // Progression of the Woman's Expressions
         const womanGifs = [
-            "https://media.tenor.com/7S8fC3J0LpMAAAAi/milk-and-mocha.gif", // Asking
-            "https://media.tenor.com/HAn8V0K9MFAAAAAi/milk-and-mocha.gif", // Annoyed/Sad
-            "https://media.tenor.com/YpsD67L97HAAAAAi/milk-and-mocha.gif", // Crying
-            "https://media.tenor.com/97_1N86I19MAAAAi/milk-and-mocha.gif", // Angry/Sadistic
-            "https://media.tenor.com/uR6G-4T3_pYAAAAi/milk-and-mocha.gif"  // Despair
+            "https://media.tenor.com/7S8fC3J0LpMAAAAi/milk-and-mocha.gif", 
+            "https://media.tenor.com/HAn8V0K9MFAAAAAi/milk-and-mocha.gif", 
+            "https://media.tenor.com/YpsD67L97HAAAAAi/milk-and-mocha.gif", 
+            "https://media.tenor.com/97_1N86I19MAAAAi/milk-and-mocha.gif", 
+            "https://media.tenor.com/uR6G-4T3_pYAAAAi/milk-and-mocha.gif"
         ];
 
-        const noPhrases = ["Are you sure?", "Pleaseeee🥹", "I'll be sad and kill you!!", "I know you want Yes!🥳", "Last Chance!"];
+        const noPhrases = ["Are you sure?", "Pleaseeeeeeee🥹", "I'll be sad and kill you!!", "I know you want Yes!🥳", "Last Chance!"];
 
         function handleNo() {
             clickCount++;
@@ -148,4 +147,3 @@
     </script>
 </body>
 </html>
-
